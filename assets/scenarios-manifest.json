@@ -1,0 +1,137 @@
+[
+  {
+    "filename": "assets/scenarios/free-gallery.jpg",
+    "author": "Giáo viên bổ sung — cần ghi rõ nguồn/tác giả",
+    "source_url": null,
+    "license": "CẦN BỔ SUNG: ghi rõ giấy phép của ảnh đã thay",
+    "purpose": "HĐ1 / TH1: quan sát thông tin giấy phép còn thiếu",
+    "description": "Kho ảnh tải miễn phí",
+    "modifications": "Thay ảnh minh họa gốc của dự án bằng ảnh do giáo viên cung cấp"
+  },
+  {
+    "filename": "assets/scenarios/teacher-transfer.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ1 / TH2: quan sát danh tính hiển thị và lời thúc giục",
+    "description": "Tin nhắn từ tài khoản giáo viên",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/copy-article.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ1 / TH3: đối chiếu nội dung gốc và bản sao",
+    "description": "Bài viết và sản phẩm nhóm",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/recruiter-otp.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ1 / TH4: quan sát yêu cầu OTP",
+    "description": "Yêu cầu xác nhận hồ sơ",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/photo-permission.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ1 / TH5: nhận biết sự đồng ý trong phạm vi poster",
+    "description": "Cuộc trao đổi về ảnh poster",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/unread-license.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ1 / TH6: tìm vị trí giấy phép trong kho mã",
+    "description": "Kho mã nguồn của một dự án",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/unknown-photo.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ3 / A và HĐ5 / 2: ảnh thiếu thông tin nguồn",
+    "description": "Ảnh tìm thấy trên Internet",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/licensed-photo.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ3 / B: quan sát tác giả và điều kiện ghi công trên ví dụ giả định",
+    "description": "Ảnh kèm điều kiện sử dụng",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/repost-article.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ3 / C: minh họa bản nháp sao chép bài viết",
+    "description": "Đăng lại bài viết lên fanpage",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/code-license.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ3 / D: xác định tài liệu cần kiểm tra",
+    "description": "Mã nguồn và tệp giấy phép",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/classmate-video.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ3 / E: phân biệt người tạo video và người sử dụng lại",
+    "description": "Video của bạn cùng lớp",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/job-deposit.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ5 / 1: nhận biết yêu cầu đóng phí trước",
+    "description": "Tin nhắn nhận việc",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/friend-otp.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ5 / 3: tình huống chia sẻ mã xác thực",
+    "description": "Tin nhắn từ bạn",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/credited-photo.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ5 / 4: ví dụ hình ảnh đã kèm dòng ghi nguồn",
+    "description": "Ảnh dùng trong sản phẩm nhóm",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  },
+  {
+    "filename": "assets/scenarios/lookalike-teacher.svg",
+    "author": "Tự tạo cho dự án bằng Codex",
+    "source_url": null,
+    "license": "Minh họa gốc của dự án; không dùng ảnh bên thứ ba",
+    "purpose": "HĐ5 / 5: cân nhắc xác minh danh tính",
+    "description": "Tên tài khoản quen thuộc",
+    "modifications": "SVG gốc, chữ tiếng Việt; không phải ảnh chụp dịch vụ thật"
+  }
+]

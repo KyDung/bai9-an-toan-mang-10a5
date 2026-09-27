@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Điều tra viên số — Bài 9: An toàn trên không gian mạng</title>
+<meta name="description" content="Phiếu học tập tương tác Bài 9 Tin học 10: An toàn trên không gian mạng.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/visuals.css">
+</head>
+<body>
+
+<!-- ============ LỚP TRANG TRÍ (ảnh kéo–thả) ============ -->
+<div id="decorLayer" class="decor-layer" aria-hidden="true"></div>
+
+<!-- ============ THANH TIẾN TRÌNH ============ -->
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <span class="brand-badge">🛡️</span>
+      <span class="brand-txt">
+        <b>ĐIỀU TRA VIÊN SỐ</b>
+        <small>Tin học 10 · Bài 9 · An toàn trên không gian mạng</small>
+      </span>
+    </div>
+    <nav class="dots" id="dots" aria-label="Các hoạt động"></nav>
+    <div class="topbar-right">
+      <button class="role-chip" id="roleChip" title="Nghề nhóm em đang nhập vai — bấm để đổi">🎭 <span>Chưa chọn nghề</span></button>
+      <span class="score-chip" id="scoreChip" title="Điểm tạm tính">0<small>/10</small></span>
+      <button class="icon-btn" id="btnDecor" title="Bật/tắt chế độ trang trí (Ctrl + Alt + D)">🖼️</button>
+    </div>
+  </div>
+  <div class="progress"><i id="progressBar"></i></div>
+</header>
+
+<main id="deck">
+
+  <!-- ==================== 0. MỞ ĐẦU ==================== -->
+  <section class="step" id="s0" data-title="Mở đầu" data-time="4 phút">
+    <div class="hero">
+      <p class="eyebrow">Hoạt động 1 · Mở đầu · 4 phút</p>
+      <h1>Nhận nhiệm vụ:<br><span class="grad">ĐIỀU TRA VIÊN SỐ</span></h1>
+      <p class="lead">Hôm qua, em đã chia sẻ hoặc tải về điều gì trên mạng? Em có biết <b>ai tạo ra</b> nó không?</p>
+    </div>
+
+    <!-- Bước 1: chọn cách làm -->
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> Em làm bài một mình hay theo nhóm?</h2>
+      <p class="sub">Chọn đúng để trang web hỏi đúng thứ cần điền và chấm điểm công bằng.</p>
+      <div class="mode-pick" id="modePick">
+        <button class="mode-btn" type="button" data-mode="nhom" aria-pressed="true">
+          <span class="m-ic">👥</span><b>Làm theo nhóm</b>
+          <span>Cần điền số nhóm, danh sách thành viên và danh hiệu đội.</span>
+        </button>
+        <button class="mode-btn" type="button" data-mode="canhan" aria-pressed="false">
+          <span class="m-ic">🙋</span><b>Em làm một mình</b>
+          <span>Chỉ cần họ tên. Hoạt động 4 chỉ yêu cầu 2 trong 5 vai là đủ điểm.</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Bước 2: thông tin -->
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> <span id="infoTitle">Lập đội điều tra</span></h2>
+      <p class="sub" id="infoSub">Điền thông tin nhóm và <b>đặt danh hiệu cho đội</b> ngay bây giờ — danh hiệu này theo nhóm em suốt tiết học.</p>
+      <div class="form-grid">
+        <label><span id="lblHoTen">Nhóm trưởng / người ghi phiếu</span>
+          <input type="text" id="fHoTen" placeholder="VD: Nguyễn Văn An" autocomplete="off">
+        </label>
+        <label>Lớp
+          <input type="text" id="fLop" value="10A5" autocomplete="off">
+        </label>
+        <label class="only-group">Nhóm số
+          <input type="text" id="fNhom" placeholder="VD: Nhóm 3" autocomplete="off">
+        </label>
+        <label>🏅 <span id="lblDanhHieu">Danh hiệu của đội</span>
+          <input type="text" id="fDanhHieu" placeholder="VD: Đội Thám tử Lá chắn xanh" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="members only-group" id="membersBox">
+        <div class="members-head">
+          <h3>👥 Thành viên nhóm <span class="member-count" id="memberCount">0 bạn</span></h3>
+          <button class="btn btn-mini" type="button" id="btnAddMember">➕ Thêm thành viên</button>
+        </div>
+        <div class="member-list" id="memberList"></div>
+        <p class="note">Mỗi bạn một dòng. Bấm <b>➕ Thêm thành viên</b> nếu còn bạn chưa có tên, bấm <b>✕</b> để bỏ dòng trống.</p>
+      </div>
+    </div>
+
+    <!-- Bước 3: chọn nghề -->
+    <div class="card">
+      <h2 class="card-h"><span class="num">3</span> Chọn nghề để nhập vai</h2>
+      <p class="sub">Chọn <b>một</b> nghề. Đây không phải câu hỏi cho điểm — nghề em chọn là <b>“cặp kính”</b> để nhìn mọi tình huống trong bài:</p>
+      <ul class="why-role">
+        <li>Tên nghề luôn hiện ở góc trên bên phải và ở đầu mỗi hoạt động, kèm câu hỏi riêng của nghề đó.</li>
+        <li><b>Hoạt động 2</b>: em phải nêu 3 việc làm đầu tiên <b>đúng theo vai nghề này</b>.</li>
+        <li><b>Hoạt động 3</b>: nếu chọn Pháp chế hoặc Sáng tạo nội dung, em làm <b>cố vấn</b> cho các nhóm khác.</li>
+        <li><b>Hoạt động 4</b>: trang web sẽ chỉ ra vai gần nghề em nhất để em nhận vai đó.</li>
+      </ul>
+      <div class="roles" id="roleGrid"></div>
+    </div>
+
+    <!-- Bước 4: 5 câu hỏi điều tra -->
+    <div class="card">
+      <h2 class="card-h"><span class="num">4</span> Nhận bộ công cụ điều tra — 5 câu hỏi</h2>
+      <p class="sub">Đọc kĩ 5 câu này. Mỗi khi gặp một tình huống trong bài, em lần lượt tự hỏi 5 câu đó.</p>
+      <ol class="q5" id="q5list"></ol>
+    </div>
+  </section>
+
+  <!-- ==================== 1. HĐ1 ==================== -->
+  <section class="step" id="s1" data-title="HĐ1 · Tín hiệu" data-time="6 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 2.1 · Hình thành kiến thức · 6 phút</p>
+      <h1>Nắm bắt <span class="grad">tín hiệu nguy hiểm</span></h1>
+      <p class="lead"><b>Mục tiêu:</b> nhìn một tình huống trên mạng là biết ngay nó an toàn, cần cảnh giác, hay phải dừng lại.</p>
+    </div>
+
+    <div class="lens-slot"></div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd1NhiemVu"></ol>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> Phân loại 6 tình huống</h2>
+      <p class="sub">Với mỗi câu, bấm <b>một</b> trong ba nút bên phải. Bấm lại nút đang chọn để bỏ chọn.</p>
+      <div class="legend" id="hd1Legend"></div>
+      <div class="qlist" id="hd1List"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> Tình huống nguy hiểm nhất</h2>
+      <p class="sub">Trong 6 câu trên, chọn <b>một</b> tình huống em cho là nguy hiểm nhất và giải thích trong <b>một câu</b>.</p>
+      <div class="form-grid">
+        <label>Tình huống nguy hiểm nhất
+          <select id="hd1Worst"><option value="">— chọn —</option></select>
+        </label>
+        <label class="wide">Vì sao nguy hiểm nhất? (một câu)
+          <input type="text" id="hd1Why" placeholder="Vì …" autocomplete="off">
+        </label>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-check" data-check="hd1">✔ Kiểm tra &amp; xem đáp án</button>
+      <p class="act-note">Bấm lúc nào cũng được. Xem đáp án rồi em vẫn sửa lại câu trả lời được — điểm tự cập nhật.</p>
+    </div>
+    <div class="feedback" id="fbHd1" hidden></div>
+
+    <div class="concl" hidden id="conclHd1">
+      <h3>📌 Chốt kiến thức</h3>
+      <p>Ba nhóm nguy cơ trên mạng: <b>(1)</b> lừa đảo, chiếm đoạt tài sản — <b>(2)</b> lộ thông tin cá nhân, tài khoản — <b>(3)</b> vi phạm quyền tác giả.</p>
+      <p class="hi">Nguyên tắc: thông tin càng <b>thúc ép</b>, càng <b>hứa hẹn</b> thì càng phải <b>dừng lại</b>.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 2. HĐ2 ==================== -->
+  <section class="step" id="s2" data-title="HĐ2 · Hồ sơ vụ án" data-time="10 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 2.2 · Hình thành kiến thức · 10 phút</p>
+      <h1>Hồ sơ vụ án số: <span class="grad">“Việc nhẹ lương cao”</span></h1>
+      <p class="lead"><b>Mục tiêu:</b> chỉ ra được dấu hiệu lừa đảo trong một tin nhắn thật và biết xử lí đúng.</p>
+    </div>
+
+    <div class="lens-slot"></div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd2NhiemVu"></ol>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="ic">📱</span> Hồ sơ vụ án: tin nhắn bạn An nhận được</h2>
+      <p class="sub">Bạn An muốn tìm việc làm thêm và nhận được tin nhắn dưới đây. Đọc kĩ trước khi làm các bước.</p>
+      <div class="phone">
+        <div class="phone-top"><span class="ava">?</span><span>Người lạ · Zalo</span></div>
+        <div class="bubbles" id="hd2Msg"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> Săn “dấu hiệu đỏ”</h2>
+      <p class="sub">Trong 8 phương án dưới đây, <b>chỉ có 5</b> là dấu hiệu đáng ngờ thật. Tick đúng 5 ô.</p>
+      <div class="checks" id="hd2Flags"></div>
+      <p class="counter">Đã chọn <span id="hd2Count">0</span>/5 dấu hiệu</p>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> Ra quyết định</h2>
+      <p class="sub">Nếu em là bạn An, em làm gì tiếp theo? Chọn <b>một</b> phương án.</p>
+      <div class="radios" id="hd2Dec"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">3</span> Ba việc làm đầu tiên theo vai nghề</h2>
+      <p class="sub">Em đang nhập vai <b id="hd2Role">(chưa chọn nghề ở Hoạt động 1)</b>. Hãy viết 3 việc <b>đúng theo vai này</b> — làm việc gì trước, việc gì sau.</p>
+      <div class="form-grid">
+        <label class="wide">Việc làm thứ nhất <input type="text" id="hd2W1" placeholder="Việc em làm ngay lập tức…" autocomplete="off"></label>
+        <label class="wide">Việc làm thứ hai <input type="text" id="hd2W2" placeholder="Việc em làm tiếp sau đó…" autocomplete="off"></label>
+        <label class="wide">Việc làm thứ ba <input type="text" id="hd2W3" placeholder="Việc em làm để người khác không bị lừa…" autocomplete="off"></label>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-check" data-check="hd2">✔ Kiểm tra &amp; xem đáp án</button>
+      <p class="act-note">Bấm lúc nào cũng được. Xem đáp án rồi em vẫn sửa lại câu trả lời được — điểm tự cập nhật.</p>
+    </div>
+    <div class="feedback" id="fbHd2" hidden></div>
+
+    <div class="concl" hidden id="conclHd2">
+      <h3>📌 Quy tắc “3 KHÔNG”</h3>
+      <ul class="big3">
+        <li>Không <b>chuyển tiền trước</b>.</li>
+        <li>Không cung cấp <b>OTP</b> và thông tin cá nhân.</li>
+        <li>Không bấm <b>link lạ</b>.</li>
+      </ul>
+      <p class="note">Liên hệ: Luật An ninh mạng 2018 và các quy định về bảo vệ dữ liệu cá nhân. Báo lừa đảo tại <b>canhbao.khonggianmang.gov.vn</b>.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 3. HĐ3 ==================== -->
+  <section class="step" id="s3" data-title="HĐ3 · Có được phép?" data-time="11 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 2.3 · Hình thành kiến thức · 11 phút</p>
+      <h1><span class="grad">“Có được phép không?”</span></h1>
+      <p class="lead"><b>Mục tiêu:</b> trước khi dùng một tư liệu trên mạng, biết phải kiểm tra gì và khi nào phải xin phép.</p>
+    </div>
+
+    <div class="lens-slot"></div>
+    <div class="advisor" id="hd3Advisor" hidden></div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd3NhiemVu"></ol>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> Phân loại 5 sản phẩm số</h2>
+      <p class="sub">Mỗi sản phẩm chọn <b>một</b> mức. Chú ý tìm trong hình: <b>ai là tác giả</b>, <b>có giấy phép không</b>, <b>ghi nguồn chưa</b>.</p>
+      <div class="legend" id="hd3Legend"></div>
+      <div class="qlist" id="hd3List"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> Câu hỏi bẫy</h2>
+      <p class="sub" id="hd3TrapQ"></p>
+      <div class="radios" id="hd3Trap"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-check" data-check="hd3">✔ Kiểm tra &amp; xem đáp án</button>
+      <p class="act-note">Bấm lúc nào cũng được. Xem đáp án rồi em vẫn sửa lại câu trả lời được — điểm tự cập nhật.</p>
+    </div>
+    <div class="feedback" id="fbHd3" hidden></div>
+
+    <div class="concl" hidden id="conclHd3">
+      <h3>📌 Quy trình kiểm tra trước khi dùng</h3>
+      <p class="flow"><span>Xác định tác giả</span><i>→</i><span>Xem giấy phép</span><i>→</i><span>Xin phép nếu cần</span><i>→</i><span>Ghi nguồn</span></p>
+      <p class="note">Tham khảo giấy phép <b>Creative Commons</b> (CC) cho hình ảnh, nội dung và các giấy phép <b>mã nguồn mở</b> (MIT, GPL…) cho mã nguồn.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 4. HĐ4 ==================== -->
+  <section class="step" id="s4" data-title="HĐ4 · Nhiều góc nhìn" data-time="6 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 3.1 · Luyện tập · 6 phút</p>
+      <h1>Một tình huống, <span class="grad">nhiều góc nhìn</span></h1>
+      <p class="lead"><b>Mục tiêu:</b> đánh giá một đề xuất có vẻ “tiện” bằng 5 góc nhìn nghề nghiệp khác nhau, rồi chọn cách làm hợp pháp và an toàn.</p>
+    </div>
+
+    <div class="lens-slot"></div>
+
+    <div class="card situ">
+      <h2 class="card-h"><span class="ic">📋</span> Tình huống</h2>
+      <p id="hd4BoiCanh"></p>
+      <p class="situ-lead" id="hd4DeXuatLead"></p>
+      <div class="propose" id="hd4DeXuat"></div>
+      <p class="situ-ask" id="hd4CauHoiLon"></p>
+    </div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd4NhiemVu"></ol>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> Mỗi vai chọn vấn đề mình lo nhất</h2>
+      <p class="vai-note" id="hd4VaiNote"></p>
+      <p class="sub" id="hd4LuuYVai"></p>
+      <div class="roleslots" id="hd4Roles"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> Xử lí lần lượt cả 5 vấn đề</h2>
+      <p class="sub">Đây là kết luận của nhóm. <b>Mỗi vấn đề</b> phải ghi đủ hai ô: không nên làm gì, và làm gì thay thế.</p>
+      <div class="vd-table" id="hd4Table"></div>
+      <p class="counter">Đã xử lí <span id="hd4Count">0</span>/5 vấn đề</p>
+      <label class="slogan-lbl">🎯 Khẩu quyết <small>(một câu thật ngắn, dễ nhớ, để lần sau tự nhắc mình)</small>
+        <input type="text" id="hd4Slogan" placeholder="VD: Hỏi 5 câu – Trước khi chia sẻ!" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-check" data-check="hd4">✔ Xem gợi ý &amp; tự đối chiếu</button>
+      <p class="act-note">Phần này không có đáp án duy nhất. Bấm để xem gợi ý của từng vai rồi tự bổ sung ý còn thiếu.</p>
+    </div>
+    <div class="feedback" id="fbHd4" hidden></div>
+  </section>
+
+  <!-- ==================== 5. HĐ5 ==================== -->
+  <section class="step" id="s5" data-title="HĐ5 · Thử thách 10s" data-time="5 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 3.2 · Luyện tập · 5 phút</p>
+      <h1>Thử thách <span class="grad">10 giây</span></h1>
+      <p class="lead"><b>Mục tiêu:</b> quyết định nhanh và đúng — mỗi tình huống chỉ có 10 giây để chọn: việc này <b>an toàn</b>, <b>cần cảnh giác kiểm tra</b>, hay phải <b>dừng lại</b>. Vẫn là ba tín hiệu của Hoạt động 2.1.</p>
+    </div>
+
+    <div class="lens-slot"></div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd5NhiemVu"></ol>
+    </div>
+
+    <div class="game" id="hd5Game">
+      <div class="game-start" id="hd5Start">
+        <p><b>5 tình huống</b>, mỗi tình huống <b>10 giây</b> để trả lời câu hỏi <b>“Gặp tình huống này, em nên làm gì?”</b> bằng một trong ba tín hiệu 🟢 AN TOÀN · 🟡 CẢNH GIÁC · 🔴 DỪNG LẠI. Chọn đúng được <b>+1 điểm</b>; hết 10 giây mà chưa chọn thì <b>không được điểm</b> câu đó. Sau mỗi câu có đáp án và giải thích ngay.</p>
+        <button class="btn btn-primary" id="hd5Go">▶ Bắt đầu</button>
+      </div>
+      <div class="game-play" id="hd5Play" hidden>
+        <div class="timer-wrap"><svg class="timer" viewBox="0 0 100 100"><circle class="t-bg" cx="50" cy="50" r="44"/><circle class="t-fg" id="hd5Ring" cx="50" cy="50" r="44"/></svg><span id="hd5Num">10</span></div>
+        <p class="qidx" id="hd5Idx"></p>
+        <p class="qtxt" id="hd5Txt"></p>
+        <p class="hd5-ask" id="hd5Ask"></p>
+        <div class="cards3" id="hd5Cards"></div>
+        <p class="hd5-fb" id="hd5Fb"></p>
+      </div>
+      <div class="game-end" id="hd5End" hidden>
+        <h3>Kết quả Thử thách 10 giây</h3>
+        <p class="bigscore"><b id="hd5Score">0</b>/5</p>
+        <ul class="hd5-review" id="hd5Review"></ul>
+        <button class="btn" id="hd5Again">↻ Chơi lại</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. HĐ6 + NỘP BÀI ==================== -->
+  <section class="step" id="s6" data-title="HĐ6 · Vận dụng" data-time="3 phút">
+    <div class="step-head">
+      <p class="eyebrow">Hoạt động 4 · Vận dụng · 3 phút · làm xong và nộp ngay tại lớp</p>
+      <h1>Cam kết <span class="grad">3 ngày an toàn số</span></h1>
+      <p class="lead" id="hd6Intro"></p>
+    </div>
+
+    <div class="card todo">
+      <h2 class="card-h"><span class="ic">🎯</span> Việc cần làm</h2>
+      <ol class="task-steps" id="hd6NhiemVu"></ol>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">1</span> <span id="hd6CamKetTitle"></span></h2>
+      <p class="sub" id="hd6CamKetDesc"></p>
+      <div class="home-check" id="hd6RaSoat"></div>
+      <p class="counter">Đã cam kết <span id="hd6Count">0</span>/5 việc</p>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">2</span> <span id="hd6LanToaTitle"></span></h2>
+      <p class="sub" id="hd6LanToaDesc"></p>
+      <div class="form-grid">
+        <label>Em sẽ nhắc ai trong gia đình?
+          <select id="hd6QuanHe"><option value="">— chọn —</option></select>
+        </label>
+        <label>Em sẽ kể cho họ hình thức lừa đảo nào?
+          <select id="hd6HinhThuc"><option value="">— chọn —</option></select>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">3</span> Viết tin nhắn cảnh báo <small class="card-note">viết ngay tại lớp — đây là sản phẩm chính</small></h2>
+      <p class="sub" id="hd6TinDesc"></p>
+      <textarea id="hd6Tin" rows="3" placeholder="VD: Cả nhà lưu ý: ai nhắn xin mã OTP hay đòi chuyển tiền trước để nhận việc thì đừng làm, gọi lại cho con kiểm tra nhé!"></textarea>
+      <p class="note" id="hd6TinCount">0 chữ</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2 class="card-h bad-h">🚫 5 KHÔNG của công dân số</h2>
+        <p class="sub">Bảng tra cứu khi em làm 5 việc đã cam kết.</p>
+        <div id="hd6No"></div>
+      </div>
+      <div class="card">
+        <h2 class="card-h good-h">✅ 5 NÊN khi hoạt động trên mạng</h2>
+        <p class="sub">Bảng tra cứu khi em nhắc người thân.</p>
+        <div id="hd6Yes"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-h"><span class="num">4</span> Nhìn lại tiết học</h2>
+      <div class="form-grid">
+        <label class="wide">Điều em nhớ nhất sau tiết học
+          <input type="text" id="fNhoNhat" placeholder="Một câu ngắn thôi…" autocomplete="off">
+        </label>
+      </div>
+      <p class="note" id="hd6HanNop"></p>
+    </div>
+
+    <div class="submit-box">
+      <button class="btn btn-primary btn-big" id="btnSubmit">📤 NỘP BÀI CHO GIÁO VIÊN</button>
+      <p class="note" id="submitNote">Bài làm được gửi về bảng tổng hợp của giáo viên. Nộp xong em vẫn xem lại được điểm ở trang Tổng kết.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 7. KẾT QUẢ ==================== -->
+  <section class="step" id="s7" data-title="Tổng kết" data-time="1 phút">
+    <div class="step-head center">
+      <p class="eyebrow">Tổng kết tiết học</p>
+      <h1 class="slogan-big"><span class="grad">Suy nghĩ đúng – Hành động đúng – An toàn số</span></h1>
+    </div>
+    <div class="result-card">
+      <p class="result-lbl" id="resLbl">Điểm của nhóm em (thang 10)</p>
+      <p class="result-score"><b id="resScore">0</b><small>/10</small></p>
+      <ul class="rubric" id="resRubric"></ul>
+      <div class="q5-recall" id="q5recall"></div>
+      <button class="btn" id="btnPrint">🖨️ In / lưu PDF phiếu học tập</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ ĐIỀU HƯỚNG ============ -->
+<footer class="navbar">
+  <button class="nav-btn" id="btnPrev">‹ Trước</button>
+  <span class="nav-info" id="navInfo"></span>
+  <button class="nav-btn nav-next" id="btnNext">Tiếp ›</button>
+</footer>
+
+<!-- ============ THANH CÔNG CỤ TRANG TRÍ ============ -->
+<div id="decorBar" class="decor-bar" hidden>
+  <span class="db-title">🖼️ Chế độ trang trí</span>
+  <span class="db-hint">Kéo ảnh từ máy vào trang · click để chọn · kéo để di chuyển · góc để phóng to · ⟲ để xoay</span>
+  <label class="db-btn">➕ Thêm ảnh<input type="file" id="decorFile" accept="image/*" multiple hidden></label>
+  <button class="db-btn" id="decorBack">Ra sau ↧</button>
+  <button class="db-btn" id="decorFront">Lên trước ↥</button>
+  <button class="db-btn" id="decorDel">🗑 Xoá</button>
+  <button class="db-btn db-primary" id="decorExport">💾 Xuất vị trí (JSON)</button>
+  <button class="db-btn db-primary" id="decorSave">⬇ Lưu ảnh vào máy</button>
+  <button class="db-btn" id="decorImport">📥 Nhập JSON</button>
+  <button class="db-btn" id="decorReset" title="Xoá bản nháp trong trình duyệt, dùng đúng bản đã chốt trong decor-static.js">↺ Dùng bản đã chốt</button>
+  <button class="db-btn" id="decorClose">✕ Thoát</button>
+</div>
+<div id="decorInfo" class="decor-info" hidden></div>
+
+<script src="js/img-fallback.js"></script>
+<script src="js/data.js"></script>
+<script src="js/visuals.js"></script>
+<script src="js/config.js"></script>
+<script src="js/decor-static.js"></script>
+<script src="js/app.js"></script>
+<script src="js/decor.js"></script>
+</body>
+</html>

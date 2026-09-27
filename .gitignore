@@ -1,0 +1,16 @@
+# Tài liệu KHBD nội bộ — không public cùng trang web học sinh
+*.docx
+*.docx.bak
+~$*.docx
+
+# Ảnh nguồn rời rạc, không được code tham chiếu
+10A5_an toan thong tin.png
+
+# Công cụ / phiên làm việc phát triển, không cần cho trang web chạy
+.playwright-cli/
+output/
+tools/
+
+# Rác hệ điều hành
+Thumbs.db
+desktop.ini
