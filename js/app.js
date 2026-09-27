@@ -937,32 +937,55 @@
 
     btn.disabled = true; btn.textContent = "⏳ Đang gửi…";
     note.textContent = "Đang gửi bài về bảng tổng hợp của giáo viên…";
+
+    let res, networkFailed = false;
     try {
-      const res = await fetch(CONFIG.GAS_URL, {
+      res = await fetch(CONFIG.GAS_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },  // tránh preflight CORS
         body: JSON.stringify(data),
         redirect: "follow"
       });
+    } catch (e) {
+      networkFailed = true;  // fetch() ném lỗi = mạng/CORS chặn, CHƯA chắc server đã nhận
+    }
+
+    if (!networkFailed) {
+      // Đọc được phản hồi từ server → tin vào đúng nội dung, KHÔNG đoán mò.
       const txt = await res.text();
-      if (!res.ok || txt.indexOf("error") > -1 && txt.indexOf("\"ok\"") === -1) throw new Error(txt.slice(0, 120));
-      S.submitted = true; save();
-      btn.textContent = "✅ ĐÃ NỘP BÀI";
-      note.innerHTML = "🎉 Nộp bài thành công! Nhóm em xem điểm ở slide <b>Tổng kết</b>.";
-      go(7);
-    } catch (err) {
-      // Dự phòng: gửi lại kiểu no-cors (không đọc được phản hồi nhưng dữ liệu vẫn tới Sheet)
-      try {
-        await fetch(CONFIG.GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
+      let json = null;
+      try { json = JSON.parse(txt); } catch (e) {}
+
+      if (res.ok && json && json.ok === true) {
         S.submitted = true; save();
         btn.textContent = "✅ ĐÃ NỘP BÀI";
-        note.innerHTML = "🎉 Đã gửi bài (chế độ dự phòng). Nhóm em xem điểm ở slide <b>Tổng kết</b>.";
+        note.innerHTML = "🎉 Nộp bài thành công! Nhóm em xem điểm ở slide <b>Tổng kết</b>.";
         go(7);
-      } catch (e2) {
+      } else {
+        // Server đã trả lời rõ ràng là lỗi (vd: getSheet_ ném exception) — báo đúng lỗi đó,
+        // KHÔNG thử lại kiểu no-cors vì lỗi này không phải do CORS, thử lại cũng sẽ lỗi y hệt
+        // và no-cors sẽ khiến trang báo "thành công" giả trong khi Sheet vẫn trống.
         btn.disabled = false; btn.textContent = "📤 NỘP BÀI CHO GIÁO VIÊN";
-        note.innerHTML = "❌ Gửi thất bại: " + esc(String(err.message || err)) +
-          ". Kiểm tra lại link Apps Script hoặc kết nối mạng. Bài làm vẫn được lưu tại máy.";
+        const chiTiet = json && json.error ? json.error : txt.slice(0, 200);
+        note.innerHTML = "❌ Server Apps Script báo lỗi: " + esc(chiTiet) +
+          ". Báo giáo viên kiểm tra lại đoạn code trong Apps Script. Bài làm vẫn được lưu tại máy.";
       }
+      return;
+    }
+
+    // Chỉ thử lại kiểu no-cors khi CHÍNH fetch() ban đầu bị chặn (network/CORS thật sự) —
+    // trường hợp này không đọc được phản hồi, nhưng nếu request đã tới được Apps Script
+    // thì doPost() vẫn ghi được dữ liệu trước khi trả lời.
+    try {
+      await fetch(CONFIG.GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
+      S.submitted = true; save();
+      btn.textContent = "✅ ĐÃ NỘP BÀI";
+      note.innerHTML = "🎉 Đã gửi bài (chế độ dự phòng, không kiểm tra được phản hồi). Nhóm em xem điểm ở slide <b>Tổng kết</b>. Nếu sau đó vẫn không thấy trong Sheet, báo giáo viên kiểm tra lại đường link Apps Script.";
+      go(7);
+    } catch (e2) {
+      btn.disabled = false; btn.textContent = "📤 NỘP BÀI CHO GIÁO VIÊN";
+      note.innerHTML = "❌ Gửi thất bại: không kết nối được tới Apps Script." +
+        " Kiểm tra lại link trong js/config.js hoặc kết nối mạng. Bài làm vẫn được lưu tại máy.";
     }
   }
 
