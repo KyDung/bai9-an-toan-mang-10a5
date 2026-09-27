@@ -18,6 +18,14 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const LS = "attt10a5.decor.v1";
 
+  /* Chỉ giáo viên chỉnh trang trí trên máy mình (mở file:// hoặc localhost) mới
+     thấy nút 🖼️ và dùng được phím tắt Ctrl+Alt+D. Trên bản đã deploy (GitHub Pages…)
+     học sinh KHÔNG thấy công cụ này — ảnh trang trí đã chốt vẫn hiển thị bình thường,
+     chỉ ẩn phần "chỉnh sửa". Vị trí ảnh sau khi kéo xong thì xuất JSON, chốt vào
+     decor-static.js rồi mới deploy — xem HUONG-DAN.md. */
+  const isLocalEdit = location.protocol === "file:" ||
+    /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
   const layer = $("#decorLayer");
   const bar   = $("#decorBar");
   const info  = $("#decorInfo");
@@ -210,6 +218,7 @@
 
   /* ---------- bàn phím ---------- */
   document.addEventListener("keydown", e => {
+    if (!isLocalEdit) return;   // học sinh trên bản deploy: phím tắt không có tác dụng
     if (e.ctrlKey && e.altKey && (e.key === "d" || e.key === "D")) { e.preventDefault(); setMode(!on); return; }
     if (!on) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
@@ -325,22 +334,27 @@
   }
 
   /* ---------- gắn sự kiện ---------- */
-  $("#btnDecor").addEventListener("click", () => setMode(!on));
-  $("#decorClose").addEventListener("click", () => setMode(false));
-  $("#decorDel").addEventListener("click", del);
-  $("#decorBack").addEventListener("click", () => zStep(-1));
-  $("#decorFront").addEventListener("click", () => zStep(1));
-  $("#decorExport").addEventListener("click", exportJSON);
-  $("#decorSave").addEventListener("click", saveImages);
-  $("#decorReset").addEventListener("click", () => {
-    if (!confirm("Xoá bản trang trí nháp trong trình duyệt và dùng đúng bản đã chốt trong decor-static.js?\n\n(Ảnh nào chưa có file trong assets/ sẽ không hiện nữa.)")) return;
-    try { localStorage.removeItem(LS); } catch (e) {}
-    sel = null; uid = 1;
-    loadItems(); render();
-    toast("Đã chuyển sang bản đã chốt trong decor-static.js (" + items.length + " ảnh).");
-  });
-  $("#decorImport").addEventListener("click", importJSON);
-  $("#decorFile").addEventListener("change", e => { addFiles(e.target.files, null); e.target.value = ""; });
+  if (isLocalEdit) {
+    $("#btnDecor").addEventListener("click", () => setMode(!on));
+    $("#decorClose").addEventListener("click", () => setMode(false));
+    $("#decorDel").addEventListener("click", del);
+    $("#decorBack").addEventListener("click", () => zStep(-1));
+    $("#decorFront").addEventListener("click", () => zStep(1));
+    $("#decorExport").addEventListener("click", exportJSON);
+    $("#decorSave").addEventListener("click", saveImages);
+    $("#decorReset").addEventListener("click", () => {
+      if (!confirm("Xoá bản trang trí nháp trong trình duyệt và dùng đúng bản đã chốt trong decor-static.js?\n\n(Ảnh nào chưa có file trong assets/ sẽ không hiện nữa.)")) return;
+      try { localStorage.removeItem(LS); } catch (e) {}
+      sel = null; uid = 1;
+      loadItems(); render();
+      toast("Đã chuyển sang bản đã chốt trong decor-static.js (" + items.length + " ảnh).");
+    });
+    $("#decorImport").addEventListener("click", importJSON);
+    $("#decorFile").addEventListener("change", e => { addFiles(e.target.files, null); e.target.value = ""; });
+  } else {
+    // Bản đã deploy: ẩn hẳn nút bật chế độ trang trí, học sinh không thấy công cụ này.
+    $("#btnDecor").style.display = "none";
+  }
 
   window.addEventListener("resize", relayout);
   window.addEventListener("scroll", relayout, { passive: true });

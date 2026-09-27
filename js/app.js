@@ -26,6 +26,25 @@
   };
 
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch (e) {} }
+
+  /** Xoá bài đã lưu trên MÁY NÀY (không đụng tới Google Sheet — bài đã nộp vẫn còn nguyên).
+   *  Dùng khi nộp xong, để lượt mở trang sau (nhóm/bạn khác dùng chung máy) không bị
+   *  thấy sẵn câu trả lời của người trước. */
+  function clearSavedState() {
+    try {
+      localStorage.removeItem(STORE_KEY);
+      localStorage.removeItem("attt10a5.step");
+    } catch (e) {}
+  }
+
+  /** Nút "Xong rồi — máy này cho nhóm/bạn khác": xoá sạch rồi tải lại trang
+   *  để có một phiên hoàn toàn mới, không phải reset tay từng ô. */
+  function resetForNextGroup() {
+    if (!confirm("Xoá bài làm hiện tại trên máy này để bắt đầu một lượt mới?\n\n(Bài đã nộp vẫn còn nguyên trong Google Sheet của giáo viên, không mất gì cả.)")) return;
+    clearSavedState();
+    window.location.reload();
+  }
+
   function load() {
     try {
       const raw = localStorage.getItem(STORE_KEY);
@@ -957,7 +976,7 @@
       try { json = JSON.parse(txt); } catch (e) {}
 
       if (res.ok && json && json.ok === true) {
-        S.submitted = true; save();
+        S.submitted = true; clearSavedState();
         btn.textContent = "✅ ĐÃ NỘP BÀI";
         note.innerHTML = "🎉 Nộp bài thành công! Nhóm em xem điểm ở slide <b>Tổng kết</b>.";
         go(7);
@@ -978,7 +997,7 @@
     // thì doPost() vẫn ghi được dữ liệu trước khi trả lời.
     try {
       await fetch(CONFIG.GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
-      S.submitted = true; save();
+      S.submitted = true; clearSavedState();
       btn.textContent = "✅ ĐÃ NỘP BÀI";
       note.innerHTML = "🎉 Đã gửi bài (chế độ dự phòng, không kiểm tra được phản hồi). Nhóm em xem điểm ở slide <b>Tổng kết</b>. Nếu sau đó vẫn không thấy trong Sheet, báo giáo viên kiểm tra lại đường link Apps Script.";
       go(7);
@@ -1002,6 +1021,7 @@
     $("#btnNext").addEventListener("click", () => go(cur + 1));
     $("#btnSubmit").addEventListener("click", submit);
     $("#btnPrint").addEventListener("click", () => window.print());
+    $("#btnNewGroup").addEventListener("click", resetForNextGroup);
 
     document.addEventListener("keydown", e => {
       if (document.querySelector('#imageViewer[open]')) return;

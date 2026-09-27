@@ -428,6 +428,12 @@ body.mode-canhan .only-group{display:none !important}
 .q5-recall b{font-size:12.5px;padding:8px 13px;border-radius:99px;background:rgba(53,224,242,.1);
   border:1px solid rgba(53,224,242,.32);font-weight:600}
 
+.result-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn-reset{background:linear-gradient(135deg,rgba(255,197,61,.16),rgba(255,90,106,.12));
+  border-color:rgba(255,197,61,.5);color:#ffdf9a}
+.btn-reset:hover{background:linear-gradient(135deg,rgba(255,197,61,.26),rgba(255,90,106,.2))}
+.reset-note{max-width:46ch;margin:14px auto 0}
+
 /* ---------- NAVBAR ---------- */
 .navbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:12px;
   padding:11px 16px;backdrop-filter:blur(14px);border-top:1px solid var(--line);
