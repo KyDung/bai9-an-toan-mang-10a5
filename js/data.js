@@ -13,7 +13,7 @@ const DATA = {
     khauhieu: "Suy nghĩ đúng – Hành động đúng – An toàn số",
   },
 
-  /* 5 câu hỏi điều tra (Phần A của phiếu học tập) */
+  /* 5 câu hỏi điều tra (Phần A của phiếu học tập) — dùng xuyên suốt cả bài */
   cauHoiDieuTra: [
     "Ai tạo ra nó?",
     "Ai sở hữu nó?",
@@ -22,68 +22,39 @@ const DATA = {
     "Chia sẻ thế nào là có trách nhiệm?",
   ],
 
-  /* Phần B – 6 thẻ nghề nghiệp số
-     ongKinh  = câu hỏi nghề này LUÔN tự hỏi, hiện ở đầu mỗi hoạt động
-     vaiHd4   = vai tương ứng ở HĐ4 (để trang web gợi ý HS nhận vai đó)
-     coVan    = true → ở HĐ3 nhóm này làm cố vấn cho cả lớp (theo KHBD) */
-  ngheNghiep: [
-    {
-      id: "attt",
-      icon: "🛡️",
-      ten: "Chuyên viên An toàn thông tin",
-      vaiHd4: "attt",
-      quanTam: "Bảo vệ tài khoản, mật khẩu, OTP, dữ liệu cá nhân.",
-      ongKinh:
-        "Thông tin này có làm lộ tài khoản, mật khẩu, OTP hay dữ liệu cá nhân của ai không?",
-    },
-    {
-      id: "phapche",
-      icon: "⚖️",
-      ten: "Chuyên viên Pháp chế",
-      vaiHd4: "phapche",
-      coVan: true,
-      quanTam: "Bản quyền, sở hữu trí tuệ, tuân thủ pháp luật.",
-      ongKinh:
-        "Việc này có đúng luật không? Ai là chủ sở hữu và mình đã được phép chưa?",
-    },
-    {
-      id: "truyenthong",
-      icon: "📣",
-      ten: "Chuyên viên Truyền thông",
-      vaiHd4: "tt",
-      quanTam: "Thông tin chính xác, nguồn uy tín, giữ uy tín tổ chức.",
-      ongKinh:
-        "Thông tin này có chính xác và đến từ nguồn uy tín không? Lan ra thì ảnh hưởng uy tín ai?",
-    },
-    {
-      id: "coder",
-      icon: "💻",
-      ten: "Lập trình viên",
-      vaiHd4: "coder",
-      quanTam: "Giấy phép mã nguồn, website an toàn, không mã độc.",
-      ongKinh:
-        "Đường link, tệp tải về, đoạn mã này có an toàn và có giấy phép rõ ràng không?",
-    },
-    {
-      id: "hr",
-      icon: "🧑‍💼",
-      ten: "Chuyên viên Tuyển dụng (HR)",
-      vaiHd4: "tt",
-      quanTam: "Nhận diện tin tuyển dụng giả mạo, bảo vệ ứng viên.",
-      ongKinh:
-        "Lời mời này có thật không? Doanh nghiệp thật có bao giờ đòi tiền hay OTP của ứng viên không?",
-    },
-    {
-      id: "creator",
-      icon: "🎨",
-      ten: "Nhà sáng tạo nội dung số",
-      vaiHd4: "design",
-      coVan: true,
-      quanTam: "Tự tạo nội dung, ghi nguồn, tôn trọng tác giả khác.",
-      ongKinh:
-        "Nếu đây là sản phẩm của mình bị người khác lấy dùng thì mình có thấy công bằng không?",
-    },
-  ],
+  /* Bước 3 (Mở đầu) — TỰ ĐÁNH GIÁ NHANH, thay cho việc chọn nghề nghiệp.
+     Đây là khởi động cá nhân, KHÔNG chấm điểm: học sinh tự soi lại thói quen
+     của mình trước khi vào bài, câu trả lời được gửi kèm để giáo viên tham
+     khảo (không ảnh hưởng điểm số). Cuối bài (HĐ6) học sinh sẽ cam kết hành
+     động cụ thể — 2 mốc "trước" và "sau" này tạo thành một mạch xuyên suốt. */
+  tuDanhGia: {
+    tieuDe: "Tự đánh giá nhanh trước khi học",
+    moTa:
+      "Trả lời thật với chính mình, không có câu nào đúng hay sai. Phần này không chấm điểm, chỉ giúp em (và cả thầy/cô) biết em đang ở đâu trước khi học bài này.",
+    mucDo: ["Đúng với em", "Không đúng", "Không chắc"],
+    cauHoi: [
+      {
+        id: "d1",
+        text: "Em đang dùng cùng một mật khẩu cho từ hai tài khoản mạng trở lên (Facebook, Gmail, TikTok…).",
+      },
+      {
+        id: "d2",
+        text: "Em từng nhận được tin nhắn hoặc cuộc gọi hứa hẹn tiền, quà tặng, hoặc việc làm dễ dàng một cách bất thường.",
+      },
+      {
+        id: "d3",
+        text: "Tài khoản mạng xã hội quan trọng nhất của em đã bật xác thực hai lớp (2FA).",
+      },
+      {
+        id: "d4",
+        text: "Em từng đăng lại (share) một bài viết hoặc hình ảnh mà không biết rõ ai là người tạo ra nó đầu tiên.",
+      },
+      {
+        id: "d5",
+        text: "Trước khi bấm vào một đường link lạ được gửi tới, em có thói quen kiểm tra xem nó có đáng tin không.",
+      },
+    ],
+  },
 
   /* HĐ1 – 6 tín hiệu: 1 An toàn · 2 Cảnh giác · 3 Dừng lại */
   hd1: {
@@ -92,19 +63,13 @@ const DATA = {
         b: 1,
         ten: "Phân loại 6 tình huống",
         phut: "4 phút",
-        mo: "Đọc từng tình huống và hình minh họa, chọn 1 trong 3 mức: An toàn, Cảnh giác hoặc Dừng lại.",
+        mo: "Đọc kĩ từng tình huống và hình minh họa. Với mỗi câu, chọn đúng 1 trong 3 mức: An toàn, Cảnh giác hoặc Dừng lại.",
       },
       {
         b: 2,
         ten: "Chọn tình huống nguy hiểm nhất",
-        phut: "1 phút",
-        mo: "Chọn 1 tình huống nguy hiểm nhất và viết lí do trong đúng một câu.",
-      },
-      {
-        b: 3,
-        ten: "Kiểm tra đáp án",
-        phut: "1 phút",
-        mo: "Bấm nút kiểm tra, đọc giải thích của những câu chưa đúng rồi sửa lại.",
+        phut: "2 phút",
+        mo: "Trong 6 câu vừa phân loại, chọn ra đúng 1 tình huống em cho là nguy hiểm nhất và giải thích lí do trong đúng một câu.",
       },
     ],
     nhan: [
@@ -115,39 +80,39 @@ const DATA = {
     items: [
       {
         id: 1,
-        text: "Một website cho tải miễn phí hàng nghìn ảnh nhưng không ghi rõ giấy phép sử dụng.",
+        text: "Em tìm thấy một website cho tải miễn phí hàng nghìn bức ảnh để làm bài thuyết trình, nhưng trang này không ghi tác giả là ai, cũng không ghi ảnh có giấy phép sử dụng gì.",
         dap: 2,
-        giai: "Chưa rõ tác giả và giấy phép, trang web còn có thể chứa mã độc.",
+        giai: "Chưa rõ tác giả và giấy phép của ảnh, trang tải miễn phí kiểu này còn có thể chứa mã độc → cần kiểm tra kĩ trước khi dùng.",
       },
       {
         id: 2,
-        text: "Người tự xưng là giáo viên nhắn tin yêu cầu chuyển tiền gấp.",
+        text: "Một tài khoản mạng xã hội lấy tên và ảnh đại diện giống hệt cô giáo chủ nhiệm nhắn tin cho em, nói cần tiền gấp và nhờ em chuyển khoản ngay.",
         dap: 3,
-        giai: "Đây là thủ đoạn giả danh người quen, thúc ép chuyển tiền.",
+        giai: "Đây là thủ đoạn giả danh người quen quen thuộc: dùng tên và ảnh thật để tạo lòng tin rồi thúc ép chuyển tiền gấp → phải dừng lại và xác minh qua kênh khác (gọi điện trực tiếp).",
       },
       {
         id: 3,
-        text: "Tìm thấy một bài viết rất hay và muốn chép toàn bộ vào sản phẩm của nhóm.",
+        text: "Nhóm em tìm được một bài viết rất hay trên mạng và định chép nguyên văn toàn bộ bài đó vào sản phẩm của nhóm, không ghi tên tác giả gốc.",
         dap: 2,
-        giai: "Cần xin phép, trích dẫn và ghi nguồn đầy đủ.",
+        giai: "Bài viết là sản phẩm có tác giả — cần xin phép, trích dẫn một phần và ghi rõ nguồn thay vì chép nguyên văn không xin phép.",
       },
       {
         id: 4,
-        text: "Nhà tuyển dụng online yêu cầu gửi mã OTP để “xác nhận hồ sơ”.",
+        text: "Một nhà tuyển dụng online nhắn tin yêu cầu em gửi mã OTP vừa nhận được qua điện thoại để “xác nhận hồ sơ ứng tuyển”.",
         dap: 3,
-        giai: "OTP là chìa khoá tài khoản — không bao giờ cung cấp cho ai.",
+        giai: "Mã OTP là chìa khoá bảo vệ tài khoản của chính em — không doanh nghiệp thật nào cần mã OTP của ứng viên để xác nhận hồ sơ → phải dừng lại, không cung cấp.",
       },
       {
         id: 5,
-        text: "Bạn của em đồng ý cho em dùng ảnh của bạn ấy trong poster.",
+        text: "Em nhắn tin hỏi và được một bạn cùng lớp đồng ý cho dùng ảnh của bạn ấy để làm poster tuyên truyền của nhóm.",
         dap: 1,
-        giai: "Đã có sự đồng ý của chủ sở hữu.",
+        giai: "Đã xin phép và được chính chủ sở hữu bức ảnh đồng ý → an toàn để sử dụng, chỉ cần ghi tên bạn ấy khi đăng poster.",
       },
       {
         id: 6,
-        text: "Nhóm lấy một đoạn mã trên GitHub nhưng chưa đọc điều kiện giấy phép.",
+        text: "Nhóm em tải một đoạn mã nguồn có sẵn trên GitHub về dùng cho dự án, nhưng chưa đọc tệp giấy phép (LICENSE) đi kèm.",
         dap: 2,
-        giai: "Phải đọc giấy phép (license) trước khi dùng.",
+        giai: "Mỗi đoạn mã nguồn có điều kiện sử dụng riêng ghi trong tệp giấy phép (license) — phải đọc kĩ trước khi quyết định cách dùng.",
       },
     ],
   },
@@ -159,31 +124,25 @@ const DATA = {
         b: 1,
         ten: "Đọc hồ sơ vụ án",
         phut: "1 phút",
-        mo: "Đọc kĩ tin nhắn bạn An nhận được, để ý những chỗ khiến em thấy bất thường.",
+        mo: "Đọc kĩ tin nhắn bạn An nhận được ở khung chat bên dưới, để ý những chỗ khiến em thấy bất thường.",
       },
       {
         b: 2,
         ten: "Săn dấu hiệu đỏ",
-        phut: "3 phút",
-        mo: "Trong 8 phương án, tick đúng 5 phương án là dấu hiệu đáng ngờ thật.",
+        phut: "4 phút",
+        mo: "Trong 8 phương án, tick đúng 5 phương án là dấu hiệu lừa đảo đáng ngờ thật sự (3 phương án còn lại là chi tiết bình thường, không phải dấu hiệu).",
       },
       {
         b: 3,
         ten: "Ra quyết định",
         phut: "1 phút",
-        mo: "Chọn 1 cách xử lí mà em cho là đúng nếu em là bạn An.",
+        mo: "Trong 4 cách xử lí, chọn đúng 1 cách mà em cho là đúng nếu em là bạn An lúc này.",
       },
       {
         b: 4,
-        ten: "Ba việc làm theo vai nghề",
-        phut: "3 phút",
-        mo: "Viết 3 việc đúng theo nghề em đã nhập vai ở Hoạt động 1, theo thứ tự làm trước – làm sau.",
-      },
-      {
-        b: 5,
-        ten: "Kiểm tra đáp án",
-        phut: "2 phút",
-        mo: "Bấm nút kiểm tra và đối chiếu với quy tắc “3 KHÔNG”.",
+        ten: "Ba việc làm đầu tiên",
+        phut: "4 phút",
+        mo: "Viết đúng 3 việc em sẽ làm ngay sau khi phát hiện đây là lừa đảo, theo đúng thứ tự: việc nào làm trước, việc nào làm sau.",
       },
     ],
     tinNhan: [
@@ -193,60 +152,76 @@ const DATA = {
       "👉 Đăng kí tại: vieclam-2026.top",
       "(Sau khi đăng kí) Bạn chuyển 300.000đ phí kích hoạt tài khoản và gửi họ tên, số CCCD, số tài khoản ngân hàng, mã OTP để hoàn tất hồ sơ nhé!",
     ],
-    /* Bước 1 – chọn đúng 5 dấu hiệu đỏ trong 8 phương án */
+    /* Bước 2 – chọn đúng 5 dấu hiệu đỏ trong 8 phương án */
     dauHieu: [
       {
         id: "a",
-        text: "Thu nhập cao bất thường, không cần kinh nghiệm.",
+        text: "Hứa hẹn thu nhập rất cao (500.000 – 1.000.000đ/ngày) trong khi không đòi hỏi kinh nghiệm hay bằng cấp gì.",
         do: true,
       },
-      { id: "b", text: "Thúc ép “số lượng có hạn, đăng kí ngay”.", do: true },
+      {
+        id: "b",
+        text: "Thúc giục đăng kí ngay lập tức vì “số lượng có hạn”, tạo cảm giác phải quyết định thật nhanh, không kịp suy nghĩ.",
+        do: true,
+      },
       {
         id: "c",
-        text: "Đường link tên miền lạ, không phải trang chính thức của doanh nghiệp.",
+        text: "Đường link dẫn tới một tên miền lạ (vieclam-2026.top), không phải website chính thức của một công ty cụ thể nào.",
         do: true,
       },
       {
         id: "d",
-        text: "Bắt chuyển tiền trước (phí kích hoạt, phí giữ chỗ).",
+        text: "Yêu cầu chuyển tiền trước khi được nhận việc, với lí do “phí kích hoạt tài khoản”.",
         do: true,
       },
       {
         id: "e",
-        text: "Đòi số CCCD, số tài khoản ngân hàng và mã OTP.",
+        text: "Đòi hỏi những thông tin rất nhạy cảm cùng lúc: số CCCD, số tài khoản ngân hàng và mã OTP.",
         do: true,
       },
-      { id: "f", text: "Công việc là nhập dữ liệu trên máy tính.", do: false },
-      { id: "g", text: "Tin nhắn được gửi vào buổi tối.", do: false },
-      { id: "h", text: "Tin nhắn có sử dụng biểu tượng cảm xúc.", do: false },
+      {
+        id: "f",
+        text: "Công việc được mô tả là ngồi nhập dữ liệu trên máy tính tại nhà.",
+        do: false,
+      },
+      {
+        id: "g",
+        text: "Tin nhắn được gửi đến vào buổi tối.",
+        do: false,
+      },
+      {
+        id: "h",
+        text: "Tin nhắn có sử dụng một vài biểu tượng cảm xúc (emoji).",
+        do: false,
+      },
     ],
-    /* Bước 2 – quyết định */
+    /* Bước 3 – quyết định (vị trí đáp án đúng đã đảo, không nằm cố định một chỗ) */
     quyetDinh: [
       {
         id: "q1",
-        text: "Đăng kí ngay cho kịp “số lượng có hạn”.",
+        text: "Chuyển trước 300.000đ để thử xem công ty này có thật hay không.",
         dung: false,
       },
       {
         id: "q2",
-        text: "Chuyển 300.000đ để thử xem có thật không.",
-        dung: false,
-      },
-      {
-        id: "q3",
-        text: "Không cung cấp thông tin, dừng lại; xác minh doanh nghiệp qua kênh chính thức; báo cho bố mẹ, thầy cô.",
+        text: "Không cung cấp thêm bất kì thông tin nào, dừng lại ngay; tự tìm và xác minh công ty qua kênh chính thức (website, số điện thoại đã công khai từ trước); báo cho bố mẹ hoặc thầy cô biết.",
         dung: true,
       },
       {
+        id: "q3",
+        text: "Gửi số CCCD trước, còn mã OTP thì giữ lại cho an toàn hơn.",
+        dung: false,
+      },
+      {
         id: "q4",
-        text: "Gửi CCCD trước, giữ lại OTP để an toàn hơn.",
+        text: "Vẫn đăng kí ngay kẻo hết “số lượng có hạn”, tính tiếp sau khi đã có việc làm.",
         dung: false,
       },
     ],
     goiY3Viec: [
-      "Chặn người gửi, không bấm vào đường link.",
-      "Chụp màn hình làm bằng chứng, báo cáo nền tảng và gửi cảnh báo tại canhbao.khonggianmang.gov.vn.",
-      "Cảnh báo bạn bè, người thân. Nếu đã lỡ cung cấp thông tin: đổi mật khẩu, gọi ngân hàng khoá tài khoản.",
+      "Chặn ngay người gửi tin nhắn, không bấm vào bất kì đường link nào trong đó.",
+      "Chụp màn hình lại làm bằng chứng, báo cáo (report) tài khoản đó trên nền tảng, và gửi cảnh báo tại canhbao.khonggianmang.gov.vn.",
+      "Cảnh báo cho bạn bè, người thân về hình thức lừa đảo này. Nếu đã lỡ cung cấp thông tin: đổi mật khẩu ngay và gọi điện cho ngân hàng để khoá tài khoản.",
     ],
   },
 
@@ -256,20 +231,14 @@ const DATA = {
       {
         b: 1,
         ten: "Phân loại 5 sản phẩm số",
-        phut: "7 phút",
-        mo: "Với mỗi sản phẩm, tìm trong hình xem ai là tác giả, có giấy phép hay chưa, rồi chọn 1 trong 3 mức.",
+        phut: "9 phút",
+        mo: "Với mỗi sản phẩm, đọc kĩ mô tả và hình minh họa để tìm ra: ai là tác giả, có giấy phép sử dụng hay chưa, đã ghi nguồn chưa. Sau đó chọn đúng 1 trong 3 mức.",
       },
       {
         b: 2,
         ten: "Trả lời câu hỏi bẫy",
         phut: "2 phút",
-        mo: "Chọn 1 phương án và nhớ lí do vì sao phương án đó đúng.",
-      },
-      {
-        b: 3,
-        ten: "Kiểm tra đáp án",
-        phut: "2 phút",
-        mo: "Bấm nút kiểm tra, ghi lại quy trình 4 bước cần làm trước khi dùng tư liệu của người khác.",
+        mo: "Đọc kĩ 3 phương án rồi chọn đúng 1 phương án — nhớ cả lí do vì sao phương án đó đúng, vì em sẽ cần giải thích lại.",
       },
     ],
     nhan: [
@@ -285,72 +254,74 @@ const DATA = {
     items: [
       {
         id: "A",
-        text: "Ảnh tìm thấy trên Internet, không ghi tác giả, không ghi giấy phép.",
+        text: "Em tìm một bức ảnh phong cảnh rất đẹp qua công cụ tìm kiếm hình ảnh trên Internet. Trang chứa ảnh không ghi tên tác giả, cũng không có bất kì thông tin nào về giấy phép sử dụng.",
         dap: 3,
-        giai: "Không xác định được chủ sở hữu → không nên tự ý dùng.",
+        giai: "Không xác định được ai là chủ sở hữu và không có giấy phép cho phép → không nên tự ý sử dụng.",
       },
       {
         id: "B",
-        text: "Hình ảnh do tác giả công bố kèm giấy phép cho phép sử dụng theo điều kiện.",
+        text: "Một nhiếp ảnh gia tên Minh Anh đăng ảnh của mình kèm giấy phép Creative Commons (CC BY 4.0) — cho phép người khác sử dụng miễn phí, với điều kiện phải ghi tên tác giả khi dùng.",
         dap: 1,
-        giai: "Được dùng nếu tuân thủ điều kiện của giấy phép và ghi nguồn.",
+        giai: "Có giấy phép rõ ràng cho phép sử dụng → được dùng nếu tuân thủ đúng điều kiện của giấy phép (ở đây là ghi tên tác giả).",
       },
       {
         id: "C",
-        text: "Bài viết trên website khác, nhóm em sao chép nguyên văn lên fanpage.",
+        text: "Nhóm em tìm thấy một bài viết hay trên một website khác và sao chép nguyên văn toàn bộ bài đó để đăng lên fanpage của nhóm, không xin phép và không ghi nguồn.",
         dap: 2,
         dapPhu: 3,
-        giai: "Phải xin phép tác giả; chép nguyên văn khi chưa xin phép là vi phạm.",
+        giai: "Bài viết có tác giả và chưa được xin phép → phải liên hệ xin phép tác giả trước; chép nguyên văn khi chưa xin phép là vi phạm quyền tác giả.",
       },
       {
         id: "D",
-        text: "Đoạn mã nguồn lấy từ GitHub, nhóm chưa đọc giấy phép kèm theo.",
+        text: "Nhóm em tải một đoạn mã nguồn từ một kho lưu trữ (repository) trên GitHub về dùng cho dự án, nhưng chưa đọc tệp giấy phép (LICENSE) đi kèm.",
         dap: 2,
-        giai: "Cần đọc giấy phép (MIT, GPL…) rồi mới quyết định cách dùng.",
+        giai: "Mỗi kho mã nguồn có điều kiện sử dụng riêng — cần đọc kĩ giấy phép (ví dụ MIT, GPL…) trước khi quyết định có được dùng theo cách nhóm định làm hay không.",
       },
       {
         id: "E",
-        text: "Video do bạn cùng lớp tự quay và đăng lên mạng, em muốn cắt một đoạn đưa vào clip của nhóm.",
+        text: "Một bạn cùng lớp tự quay và đăng một video lên mạng xã hội của bạn ấy. Em muốn cắt một đoạn trong video đó để ghép vào clip giới thiệu của nhóm mình.",
         dap: 2,
-        giai: "Bạn ấy là tác giả → cần xin phép và ghi tên bạn ấy.",
+        giai: "Bạn cùng lớp là tác giả của video đó → cần xin phép bạn ấy trước khi sử dụng và ghi rõ tên bạn ấy trong sản phẩm.",
       },
     ],
     bay: {
       cauHoi:
-        "“Đã có trên Internet” có nghĩa là “được phép sử dụng tự do” không?",
+        "“Một tác phẩm đã xuất hiện công khai trên Internet” có đồng nghĩa với “ai cũng được phép sử dụng tự do” không?",
       luaChon: [
         {
           id: "b1",
-          text: "Có. Đã công khai trên mạng thì ai cũng được dùng.",
+          text: "Có, miễn là không đem bán để kiếm tiền thì được dùng thoải mái.",
           dung: false,
         },
         {
           id: "b2",
-          text: "Không. Mọi tác phẩm đều có tác giả và được bảo hộ quyền tác giả, trừ khi tác giả cho phép hoặc tác phẩm thuộc phạm vi công cộng.",
+          text: "Có, một khi tác giả đã đăng công khai lên mạng thì coi như đã đồng ý cho mọi người sử dụng.",
+          dung: false,
+        },
+        {
+          id: "b3",
+          text: "Không. Mọi tác phẩm đều có tác giả và được pháp luật bảo hộ quyền tác giả ngay từ khi tạo ra, trừ khi chính tác giả cho phép hoặc tác phẩm đã thuộc phạm vi sử dụng chung.",
           dung: true,
         },
-        { id: "b3", text: "Có, miễn là không bán lấy tiền.", dung: false },
       ],
     },
   },
 
-  /* HĐ4 – Một tình huống, nhiều góc nhìn */
+  /* HĐ4 – Một tình huống, nhiều góc nhìn (hoạt động nhóm đóng vai —
+     ĐỘC LẬP hoàn toàn với phần tự đánh giá ở Mở đầu; 5 vai dưới đây
+     là 5 vai của riêng hoạt động này). */
   hd4: {
-    /* Bối cảnh: kể chuyện để học sinh hình dung mình đang ở trong tình huống */
     boiCanh:
       "Trường tổ chức Ngày hội hướng nghiệp. Nhóm em được giao làm một website giới thiệu nghề nghiệp cho học sinh THPT, hạn nộp còn 3 ngày mà nhóm vẫn thiếu tư liệu.",
-    /* 5 VẤN ĐỀ trong đề xuất của bạn — mỗi vấn đề là một dòng nhóm phải giải quyết.
-       vaiLo   = những vai thường lo vấn đề này nhất (dùng để gợi ý và nhận xét)
-       khongNen / nen = đáp án gợi ý riêng cho từng vấn đề */
     deXuatCuaBan:
-      "Trong lúc gấp, một bạn đề xuất 5 việc sau cho nhanh. Mỗi việc là một VẤN ĐỀ nhóm em phải xử lí:",
+      "Trong lúc gấp, một bạn trong nhóm đề xuất 5 việc sau cho nhanh. Mỗi việc là một VẤN ĐỀ nhóm em phải xử lí:",
     deXuat: [
       {
         id: 1,
         ic: "🖼️",
         ten: "Ảnh minh họa",
         noiDung:
-          "Vào Google Hình ảnh, thấy ảnh nào đẹp thì tải về dùng, không cần xem nguồn.",
+          "Vào Google Hình ảnh, thấy ảnh nào đẹp thì tải về dùng luôn, không cần xem nguồn hay giấy phép.",
         vaiLo: ["design", "phapche"],
         khongNen: "Tải ảnh không rõ tác giả, không rõ giấy phép về dùng.",
         nen: "Tự chụp, tự thiết kế, hoặc dùng kho ảnh có giấy phép (Creative Commons) và ghi nguồn đầy đủ.",
@@ -360,142 +331,138 @@ const DATA = {
         ic: "📄",
         ten: "Bài giới thiệu nghề",
         noiDung:
-          "Sao chép nguyên văn một bài viết từ website hướng nghiệp khác dán vào trang của nhóm.",
+          "Sao chép nguyên văn một bài viết từ website hướng nghiệp khác, dán thẳng vào trang của nhóm.",
         vaiLo: ["tt", "phapche"],
         khongNen:
           "Chép nguyên văn bài của người khác, không xin phép, không ghi nguồn.",
-        nen: "Tự viết bằng lời của nhóm; nếu cần dẫn lại thì trích một đoạn ngắn có ghi rõ nguồn và tác giả.",
+        nen: "Tự viết lại bằng lời của nhóm; nếu cần dẫn lại thì chỉ trích một đoạn ngắn, có ghi rõ nguồn và tác giả.",
       },
       {
         id: 3,
         ic: "🏛️",
         ten: "Logo trường đại học",
-        noiDung: "Lấy logo của một trường đại học đặt lên trang cho “uy tín”.",
+        noiDung:
+          "Lấy logo của một trường đại học đặt lên trang web cho có vẻ “uy tín” hơn.",
         vaiLo: ["phapche", "tt"],
         khongNen:
-          "Dùng logo của tổ chức khác khi chưa được phép — người xem còn hiểu nhầm là trường đó bảo trợ cho web của nhóm.",
-        nen: "Xin phép nhà trường; hoặc chỉ nêu tên trường như một thông tin và tự thiết kế hình ảnh riêng của nhóm.",
+          "Dùng logo của tổ chức khác khi chưa được phép — người xem còn có thể hiểu nhầm là trường đó đang bảo trợ cho website của nhóm.",
+        nen: "Xin phép nhà trường trước khi dùng logo; hoặc chỉ nêu tên trường như một dòng thông tin chữ, tự thiết kế hình ảnh riêng của nhóm.",
       },
       {
         id: 4,
         ic: "🎵",
         ten: "Nhạc nền cho video",
-        noiDung: "Chèn một bài nhạc đang nổi trên mạng vào video giới thiệu.",
+        noiDung:
+          "Chèn một bài nhạc đang thịnh hành trên mạng vào video giới thiệu của nhóm.",
         vaiLo: ["phapche", "design"],
         khongNen:
-          "Chèn nhạc đang có bản quyền vào video — video có thể bị chặn hoặc bị khiếu nại.",
-        nen: "Dùng nhạc miễn phí bản quyền từ thư viện âm thanh có giấy phép, hoặc nhóm tự thu âm.",
+          "Chèn một bản nhạc đang có bản quyền vào video — video có thể bị nền tảng chặn phát hoặc nhóm bị khiếu nại vi phạm bản quyền.",
+        nen: "Dùng nhạc miễn phí bản quyền lấy từ thư viện âm thanh có giấy phép rõ ràng, hoặc nhóm tự sáng tác/thu âm.",
       },
       {
         id: 5,
         ic: "🧩",
-        ten: "Plugin lạ và form xin thông tin",
+        ten: "Plugin lạ và biểu mẫu xin thông tin",
         noiDung:
-          "Tải một plugin lạ từ trang chia sẻ cho web có hiệu ứng đẹp, và thêm một form xin số điện thoại, email của bạn xem web để “thống kê”.",
+          "Tải một plugin lạ từ một trang chia sẻ để website có hiệu ứng đẹp hơn, đồng thời thêm một biểu mẫu (form) xin số điện thoại và email của người xem web để “thống kê”.",
         vaiLo: ["coder", "attt"],
         khongNen:
-          "Cài plugin không rõ nguồn và tự ý thu số điện thoại, email của người xem.",
-        nen: "Chỉ dùng plugin có giấy phép rõ ràng, tải từ trang chính thức; không thu thập thông tin cá nhân người xem, nếu thật cần thì phải nói rõ mục đích và xin phép; đặt mật khẩu mạnh cho tài khoản quản trị web.",
+          "Cài một plugin không rõ nguồn gốc, đồng thời tự ý thu thập số điện thoại và email của người xem mà không nói rõ mục đích.",
+        nen: "Chỉ dùng plugin có giấy phép rõ ràng, tải từ trang chính thức; không thu thập thông tin cá nhân của người xem nếu không thật sự cần thiết, và nếu cần thì phải nói rõ mục đích, xin phép trước; đặt mật khẩu mạnh cho tài khoản quản trị website.",
       },
     ],
     cauHoiLon:
-      "Nếu làm đúng 5 điều đó, nhóm em có thể gặp rắc rối gì? Với từng vấn đề, nhóm nên làm thế nào cho vừa nhanh, vừa hợp pháp, vừa an toàn?",
-    /* Nhiệm vụ của nhóm — nói rõ từng bước, làm gì, trong bao lâu */
+      "Nếu làm đúng cả 5 điều trên, nhóm em có thể gặp rắc rối gì? Với từng vấn đề, nhóm nên làm thế nào để website vừa hoàn thành nhanh, vừa hợp pháp, vừa an toàn?",
     nhiemVu: [
       {
         b: 1,
         ten: "Phân vai theo số bạn trong nhóm",
         phut: "1 phút",
-        mo: "Nhóm có bao nhiêu bạn thì nhận bấy nhiêu vai (tối đa 5). Nhóm ít bạn thì một bạn có thể giữ 2 vai — trang web sẽ nói rõ nhóm em cần ít nhất mấy vai.",
+        mo: "Nhóm có bao nhiêu bạn thì nhận bấy nhiêu vai trong 5 vai bên dưới (tối đa 5 vai). Nhóm ít bạn thì một bạn có thể giữ 2 vai — trang web sẽ tự tính rõ nhóm em cần ít nhất mấy vai.",
       },
       {
         b: 2,
         ten: "Mỗi vai chọn vấn đề mình lo nhất",
         phut: "2 phút",
-        mo: "Đọc 5 vấn đề bằng “con mắt” của vai mình, chọn vấn đề em lo nhất rồi ghi em đề nghị nhóm làm gì thay thế.",
+        mo: "Mỗi bạn đọc cả 5 vấn đề bằng “con mắt” của vai mình, chọn ra đúng 1 vấn đề mà vai đó lo nhất, rồi viết rõ mình đề nghị nhóm làm gì thay thế.",
       },
       {
         b: 3,
         ten: "Xử lí lần lượt cả 5 vấn đề",
         phut: "3 phút",
-        mo: "Ở bảng bước 2, mỗi vấn đề ghi rõ KHÔNG nên làm gì và NÊN làm gì thay thế. Cuối cùng đặt một khẩu quyết thật ngắn.",
+        mo: "Từng vấn đề một, cả nhóm cùng thống nhất và ghi vào bảng: KHÔNG nên làm gì và NÊN làm gì thay thế. Phải làm đủ cả 5 vấn đề, không được bỏ sót. Cuối cùng đặt một khẩu quyết thật ngắn cho cả nhóm.",
       },
     ],
-    /* Ghi chú quan trọng cho học sinh: vai không chia theo tỉ lệ 1 vai = 1 vấn đề */
     luuYVai:
-      "Không phải một vai chỉ lo một vấn đề. Một vấn đề có thể bị nhiều vai phản đối, và một vai có thể lo nhiều vấn đề — nhưng cả 5 vấn đề đều phải được nhóm xử lí ở bước 2.",
+      "Lưu ý: một vai không chỉ lo đúng một vấn đề. Một vấn đề có thể bị nhiều vai cùng phản đối, và một vai có thể lo nhiều vấn đề khác nhau — nhưng dù ai lo vấn đề nào, thì ở Bước 3 cả 5 vấn đề đều phải được nhóm xử lí đầy đủ.",
     vai: [
       {
         id: "design",
         ten: "Designer",
         vanDeGoiY: 1,
         dinhHuong:
-          "Ảnh, logo, hình trong video này của ai? Nhóm có cách nào tự làm hình ảnh của mình không?",
-        goiY: "Ảnh và logo đều có chủ sở hữu; nên tự thiết kế hoặc dùng kho ảnh có giấy phép.",
+          "Ảnh, logo, hình ảnh trong video này là của ai? Nhóm có cách nào tự làm ra hình ảnh của riêng mình không?",
+        goiY: "Ảnh và logo đều có chủ sở hữu; nên tự thiết kế hoặc dùng kho ảnh có giấy phép cho phép sử dụng.",
       },
       {
         id: "tt",
         ten: "Chuyên viên Truyền thông",
         vanDeGoiY: 2,
         dinhHuong:
-          "Nội dung sao chép có chính xác, có nguồn uy tín không? Người xem có bị hiểu nhầm điều gì không?",
-        goiY: "Thông tin phải chính xác, nguồn uy tín, không gây hiểu nhầm và không ảnh hưởng uy tín của tổ chức khác.",
+          "Nội dung sao chép có chính xác và đến từ nguồn uy tín không? Người xem có thể hiểu nhầm điều gì không?",
+        goiY: "Thông tin phải chính xác, đến từ nguồn uy tín, không gây hiểu nhầm và không ảnh hưởng đến uy tín của tổ chức khác.",
       },
       {
         id: "phapche",
         ten: "Chuyên viên Pháp chế",
         vanDeGoiY: 3,
         dinhHuong:
-          "Việc nào trong 5 vấn đề là vi phạm quyền tác giả, nhãn hiệu? Muốn dùng hợp pháp thì phải làm gì trước?",
-        goiY: "Sao chép bài viết, dùng logo, dùng nhạc khi chưa xin phép đều là vi phạm quyền tác giả và quyền sở hữu trí tuệ.",
+          "Việc nào trong 5 vấn đề là vi phạm quyền tác giả hoặc quyền sở hữu trí tuệ? Muốn dùng hợp pháp thì phải làm gì trước?",
+        goiY: "Sao chép bài viết, dùng logo, dùng nhạc khi chưa xin phép đều là hành vi vi phạm quyền tác giả và quyền sở hữu trí tuệ.",
       },
       {
         id: "coder",
         ten: "Lập trình viên",
         vanDeGoiY: 5,
         dinhHuong:
-          "Plugin, mã nguồn nhóm định dùng có giấy phép không? Tải từ đâu? Có nguy cơ chứa mã độc không?",
-        goiY: "Mã nguồn, plugin phải có giấy phép rõ ràng và tải từ nguồn chính thức; website không chứa link, tệp độc hại.",
+          "Plugin, mã nguồn nhóm định dùng có giấy phép rõ ràng không? Tải từ nguồn nào? Có nguy cơ chứa mã độc không?",
+        goiY: "Mã nguồn, plugin phải có giấy phép rõ ràng và tải từ nguồn chính thức; website không được chứa link hay tệp độc hại.",
       },
       {
         id: "attt",
         ten: "Chuyên viên An toàn thông tin",
         vanDeGoiY: 5,
         dinhHuong:
-          "Web có thu thập thông tin cá nhân của người xem không? Tài khoản quản trị web được bảo vệ thế nào?",
-        goiY: "Không thu thập dữ liệu cá nhân người xem trái phép; bảo vệ tài khoản quản trị bằng mật khẩu mạnh và xác thực hai lớp.",
+          "Website có đang thu thập thông tin cá nhân của người xem không? Tài khoản quản trị website được bảo vệ bằng cách nào?",
+        goiY: "Không thu thập dữ liệu cá nhân của người xem khi không cần thiết; bảo vệ tài khoản quản trị bằng mật khẩu mạnh và xác thực hai lớp.",
       },
     ],
   },
 
   /* HĐ5 – Thử thách 10 giây: mỗi câu có 10 giây để CHỌN đáp án đúng */
   hd5: {
-    giay: 10, // số giây cho mỗi câu — đổi ở đây là đổi cả đồng hồ
+    giay: 10,
     nhiemVu: [
       {
         b: 1,
         ten: "Bấm Bắt đầu",
         phut: "",
-        mo: "Cả nhóm ngồi sẵn sàng rồi mới bấm, vì đồng hồ chạy ngay.",
+        mo: "Chỉ bấm khi đã sẵn sàng, vì đồng hồ đếm ngược chạy ngay khi câu hỏi đầu tiên xuất hiện.",
       },
       {
         b: 2,
         ten: "Chọn đáp án trong 10 giây",
         phut: "2 phút",
-        mo: "Mỗi tình huống trả lời câu “em nên làm gì?” bằng 1 trong 3 tín hiệu: AN TOÀN, CẢNH GIÁC hoặc DỪNG LẠI. Hết 10 giây chưa chọn thì mất điểm câu đó.",
+        mo: "Với mỗi trong 5 tình huống, trả lời câu “em nên làm gì?” bằng đúng 1 trong 3 tín hiệu: AN TOÀN, CẢNH GIÁC hoặc DỪNG LẠI. Hết 10 giây mà chưa chọn thì mất điểm câu đó.",
       },
       {
         b: 3,
-        ten: "Xem lại 5 câu",
+        ten: "Xem lại kết quả",
         phut: "3 phút",
-        mo: "Đọc bảng kết quả cuối, xem lại giải thích của những câu chọn sai.",
+        mo: "Đọc bảng kết quả hiện ra sau khi trả lời hết 5 câu, xem lại lời giải thích của những câu đã chọn sai.",
       },
     ],
-    /* Câu hỏi chung cho cả 5 tình huống — hiện ngay trên 3 phương án
-       để học sinh hiểu mình đang chọn cái gì. */
     cauHoi: "Gặp tình huống này, em nên làm gì?",
-    /* Ba phương án dùng ĐÚNG ba mức của HĐ1 (An toàn – Cảnh giác – Dừng lại)
-       để cả bài chỉ có một bộ tín hiệu, không sinh thêm khái niệm mới. */
     the: [
       {
         v: "xanh",
@@ -522,33 +489,33 @@ const DATA = {
     items: [
       {
         id: 1,
-        text: "Nhận tin nhắn tuyển dụng, yêu cầu chuyển 200.000đ để nhận việc.",
+        text: "Em nhận được tin nhắn mời làm cộng tác viên online, kèm yêu cầu chuyển khoản 200.000đ “phí kích hoạt tài khoản” trước khi bắt đầu công việc.",
         dap: "do",
-        giai: "Đòi tiền trước là dấu hiệu lừa đảo → DỪNG LẠI, không chuyển tiền.",
+        giai: "Đòi tiền trước khi làm việc là dấu hiệu lừa đảo rõ ràng → DỪNG LẠI, không chuyển tiền.",
       },
       {
         id: 2,
-        text: "Muốn dùng một bức ảnh trên Internet nhưng chưa biết tác giả.",
+        text: "Em tìm được một bức ảnh rất đẹp trên Internet muốn đưa vào bài thuyết trình, nhưng chưa biết ai là tác giả hay ảnh có giấy phép sử dụng gì không.",
         dap: "vang",
-        giai: "Chưa rõ tác giả và giấy phép → CẢNH GIÁC, phải kiểm tra trước khi dùng.",
+        giai: "Chưa rõ tác giả và giấy phép → CẢNH GIÁC, phải kiểm tra kĩ trước khi dùng.",
       },
       {
         id: 3,
-        text: "Bạn gửi mã OTP và nhờ em đăng nhập hộ tài khoản.",
+        text: "Một người bạn nhắn tin gửi cho em mã OTP vừa nhận được và nhờ em đăng nhập giúp vào tài khoản của bạn ấy.",
         dap: "do",
-        giai: "Không nhận, không dùng OTP của người khác → DỪNG LẠI.",
+        giai: "Tuyệt đối không nhận, không sử dụng mã OTP của người khác → DỪNG LẠI.",
       },
       {
         id: 4,
-        text: "Dùng hình ảnh được cung cấp kèm giấy phép cho phép, có ghi nguồn.",
+        text: "Em dùng một bức ảnh có giấy phép cho phép sử dụng, và trong sản phẩm của nhóm đã ghi đầy đủ tên tác giả cùng nguồn ảnh.",
         dap: "xanh",
-        giai: "Có giấy phép cho phép và đã ghi nguồn → AN TOÀN, dùng và chia sẻ được.",
+        giai: "Có giấy phép cho phép sử dụng và đã ghi nguồn đầy đủ → AN TOÀN, dùng và chia sẻ được.",
       },
       {
         id: 5,
-        text: "Tài khoản giống tên giáo viên nhắn tin nhờ chuyển tiền.",
+        text: "Một tài khoản mạng xã hội có tên và ảnh đại diện giống hệt giáo viên của em nhắn tin nhờ chuyển tiền gấp.",
         dap: "do",
-        giai: "DỪNG LẠI và xác minh lại qua một kênh liên lạc khác.",
+        giai: "DỪNG LẠI ngay và xác minh lại qua một kênh liên lạc khác (gọi điện trực tiếp), vì tài khoản có thể đã bị giả mạo.",
       },
     ],
   },
@@ -563,68 +530,66 @@ const DATA = {
         b: 1,
         ten: "Chọn việc sẽ làm",
         phut: "1 phút",
-        mo: "Tick những việc em cam kết làm trong 3 ngày tới.",
+        mo: "Tick vào những việc em thật sự cam kết sẽ làm trong 3 ngày tới.",
       },
       {
         b: 2,
         ten: "Chọn người sẽ nhắc",
         phut: "30 giây",
-        mo: "Chọn một người thân và một hình thức lừa đảo em sẽ kể cho họ.",
+        mo: "Chọn đúng 1 người thân em sẽ nói chuyện cùng, và đúng 1 hình thức lừa đảo em sẽ kể cho người đó nghe.",
       },
       {
         b: 3,
         ten: "Viết tin nhắn cảnh báo",
         phut: "1 phút 30",
-        mo: "Viết ngay tại lớp 1–2 câu gửi vào nhóm chat gia đình. Đây là sản phẩm chính của hoạt động.",
+        mo: "Viết ngay tại lớp một tin nhắn dài 1–2 câu để gửi vào nhóm chat gia đình. Đây là sản phẩm chính của hoạt động, sẽ được giáo viên chấm.",
       },
       {
         b: 4,
         ten: "Nộp bài",
         phut: "",
-        mo: "Bấm NỘP BÀI ở cuối trang. Ba ngày sau em thực hiện đúng cam kết, tiết sau báo cáo 1 phút.",
+        mo: "Bấm nút NỘP BÀI ở cuối trang. Ba ngày sau, em thực hiện đúng những việc đã cam kết; tiết học sau, mỗi nhóm báo cáo 1 phút về kết quả.",
       },
     ],
     gioiThieu:
-      "Ngay tại lớp em chọn những việc mình cam kết làm, chọn người thân mình sẽ nhắc, và viết luôn tin nhắn cảnh báo — rồi nộp bài.",
+      "Ngay tại lớp, em chọn những việc mình cam kết làm, chọn người thân mình sẽ nhắc, và viết luôn tin nhắn cảnh báo — rồi nộp bài. Không vẽ poster, không thuyết trình.",
     hanNop:
-      "Ba ngày tới em thực hiện đúng những việc đã cam kết và gửi tin nhắn cảnh báo cho gia đình. Đầu tiết học sau, mỗi nhóm báo cáo 1 phút về việc đã làm được.",
+      "Trong 3 ngày tới, em thực hiện đúng những việc đã cam kết và gửi tin nhắn cảnh báo cho gia đình. Đầu tiết học sau, mỗi nhóm báo cáo 1 phút về việc đã làm được.",
 
-    /* Bước 1 – chọn việc sẽ làm (cam kết, không phải đã làm) */
     camKetTieuDe: "Em cam kết sẽ làm những việc nào trong 3 ngày tới?",
     camKetMoTa:
-      "Tick vào việc em thật sự sẽ làm. Chọn được cả 5 thì tốt, nhưng thà cam kết 3 việc rồi làm thật còn hơn tick cả 5 cho đẹp.",
+      "Tick vào việc em thật sự sẽ làm — không phải việc đã làm rồi. Cam kết 3 việc rồi làm thật vẫn tốt hơn tick cả 5 cho có.",
     raSoat: [
       {
         id: "r1",
         ic: "🔑",
-        text: "Đổi mật khẩu mạnh (từ 8 kí tự, có chữ hoa, chữ số, kí tự đặc biệt) cho tài khoản quan trọng nhất của em.",
+        text: "Đổi mật khẩu mạnh (từ 8 kí tự trở lên, có chữ hoa, chữ số, kí tự đặc biệt) cho tài khoản quan trọng nhất của em.",
       },
       {
         id: "r2",
         ic: "🔒",
-        text: "Bật xác thực hai lớp (2FA) cho tài khoản đó.",
+        text: "Bật xác thực hai lớp (2FA) cho tài khoản quan trọng nhất đó.",
       },
       {
         id: "r3",
         ic: "📱",
-        text: "Mở mục “thiết bị đang đăng nhập”, đăng xuất mọi thiết bị em không nhận ra.",
+        text: "Mở mục “thiết bị đang đăng nhập” trong phần cài đặt tài khoản, đăng xuất mọi thiết bị em không nhận ra.",
       },
       {
         id: "r4",
         ic: "🙈",
-        text: "Kiểm tra quyền riêng tư: ai đang xem được số điện thoại, ngày sinh, ảnh của em — chỉnh lại cho chặt hơn.",
+        text: "Kiểm tra lại quyền riêng tư: ai đang xem được số điện thoại, ngày sinh, ảnh cá nhân của em — chỉnh lại cho chặt hơn nếu cần.",
       },
       {
         id: "r5",
         ic: "©️",
-        text: "Rà soát một sản phẩm số của em (bài đăng, clip, slide): ghi nguồn đầy đủ hoặc bỏ tư liệu chưa xin phép.",
+        text: "Rà soát lại một sản phẩm số của chính em (một bài đăng, video, slide…): ghi nguồn đầy đủ hoặc bỏ tư liệu chưa xin phép ra khỏi sản phẩm đó.",
       },
     ],
 
-    /* Bước 2 – chọn người thân và hình thức lừa đảo sẽ kể */
     lanToa: {
       tieuDe: "Chọn người em sẽ nhắc",
-      moTa: "Người bị lừa nhiều nhất thường là người lớn trong gia đình. Chọn một người em sẽ nói chuyện cùng và một hình thức lừa đảo em sẽ kể cho họ.",
+      moTa: "Người bị lừa đảo trên mạng nhiều nhất thường là người lớn tuổi trong gia đình. Chọn đúng 1 người em sẽ nói chuyện cùng và đúng 1 hình thức lừa đảo em sẽ kể cho người đó nghe.",
       quanHe: [
         "Bố",
         "Mẹ",
@@ -636,31 +601,30 @@ const DATA = {
         "Người thân khác",
       ],
       hinhThuc: [
-        "Tuyển dụng “việc nhẹ lương cao”, đòi phí kích hoạt",
+        "Tuyển dụng “việc nhẹ lương cao”, đòi phí kích hoạt trước",
         "Giả danh người quen (thầy cô, họ hàng) nhờ chuyển tiền gấp",
-        "Đòi mã OTP để “xác nhận hồ sơ”, “nhận quà”",
-        "Link lạ trúng thưởng, nhận quà miễn phí",
-        "Giả danh công an, ngân hàng, nhân viên giao hàng",
+        "Đòi mã OTP để “xác nhận hồ sơ” hoặc “nhận quà”",
+        "Gửi đường link lạ báo trúng thưởng, nhận quà miễn phí",
+        "Giả danh công an, ngân hàng, hoặc nhân viên giao hàng",
       ],
     },
 
-    /* Bước 3 – sản phẩm chính, viết ngay tại lớp */
     tinMoTa:
-      "Viết 1–2 câu thật ngắn, dễ hiểu với người lớn, có nói rõ “đừng làm gì” và “hãy làm gì”. Đây là phần giáo viên chấm và cả lớp bình chọn.",
+      "Viết đúng 1–2 câu, thật ngắn gọn và dễ hiểu với người lớn tuổi. Trong tin nhắn phải nói rõ được hai điều: đừng làm gì, và hãy làm gì. Đây là phần giáo viên sẽ chấm và cả lớp cùng bình chọn.",
 
     khong: [
-      "Không cung cấp mã OTP, mật khẩu cho bất kì ai.",
-      "Không chuyển tiền cho người lạ hoặc công việc đòi “phí trước”.",
-      "Không bấm vào đường link lạ, không tải tệp không rõ nguồn.",
+      "Không cung cấp mã OTP, mật khẩu cho bất kì ai, kể cả người tự xưng là nhân viên ngân hàng hay công an.",
+      "Không chuyển tiền cho người lạ, hoặc cho bất kì công việc nào đòi “phí trước”.",
+      "Không bấm vào đường link lạ, không tải tệp không rõ nguồn gốc.",
       "Không sao chép, đăng lại sản phẩm của người khác khi chưa được phép.",
       "Không chia sẻ tin chưa kiểm chứng và thông tin cá nhân của người khác.",
     ],
     nen: [
-      "Nên đặt mật khẩu mạnh, bật xác thực hai lớp.",
-      "Nên xác minh thông tin qua kênh chính thức.",
-      "Nên xin phép và ghi nguồn khi dùng sản phẩm của người khác.",
-      "Nên báo bố mẹ, thầy cô khi gặp tình huống đáng ngờ.",
-      "Nên dừng lại 10 giây suy nghĩ trước khi chia sẻ.",
+      "Nên đặt mật khẩu mạnh và bật xác thực hai lớp cho mọi tài khoản quan trọng.",
+      "Nên xác minh lại thông tin qua một kênh chính thức trước khi tin và hành động theo.",
+      "Nên xin phép và ghi nguồn đầy đủ khi sử dụng sản phẩm của người khác.",
+      "Nên báo ngay cho bố mẹ, thầy cô khi gặp một tình huống đáng ngờ trên mạng.",
+      "Nên dừng lại 10 giây để suy nghĩ kĩ trước khi bấm chia sẻ bất cứ điều gì.",
     ],
   },
 };

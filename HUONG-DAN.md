@@ -146,15 +146,21 @@ màn hình. Khi tắt chế độ trang trí, ảnh không chặn chuột và n�
 |---|---|---|
 | Câu hỏi, đáp án, lời giải | `js/data.js` | `hd1`, `hd2`, `hd3`, `hd4`, `hd5`, `hd6` |
 | Tên trường, lớp, khẩu hiệu | `js/data.js` | `meta` |
-| 6 thẻ nghề nghiệp | `js/data.js` | `ngheNghiep` |
+| 5 câu tự đánh giá (Mở đầu, không chấm điểm) | `js/data.js` | `tuDanhGia` |
 | Số giây của Thử thách 10 giây | `js/data.js` | `hd5.giay` |
 | Nhiệm vụ "Cam kết 3 ngày an toàn số" | `js/data.js` | `hd6.raSoat`, `hd6.lanToa` |
-| Câu "ống kính" của từng nghề | `js/data.js` | `ngheNghiep[].ongKinh` |
 | Khối "Việc cần làm" của mỗi hoạt động | `js/data.js` | `hd1.nhiemVu` … `hd6.nhiemVu` |
 | Số vai cần điền để đủ điểm HĐ4 | `js/app.js` | hàm `vaiCanThiet()` |
-| Cách tính điểm thang 10 | `js/app.js` | hàm `computeScore()` |
+| Cách tính điểm thang 10 (không hiện trên web, chỉ gửi vào Sheet) | `js/app.js` | hàm `computeScore()` |
 | Cột trong Google Sheet | `apps-script/Code.gs` | mảng `FIELDS` (sửa xong Deploy lại) |
 | Màu sắc, phông chữ | `css/style.css` | khối `:root` |
 
-Nút **🖨️ In / lưu PDF** ở slide Tổng kết in cả 8 slide thành phiếu học tập giấy
+**Từ bản cập nhật này:** đã bỏ nút "Kiểm tra & xem đáp án" ở từng hoạt động (học sinh làm
+xong là chuyển hoạt động tiếp theo, không tự xem đáp án); bỏ thanh chuyển nhanh giữa các
+slide ở đầu trang (chỉ còn nút Trước/Tiếp ở cuối, tránh học sinh bỏ qua hoạt động); trang
+Tổng kết đổi thành lời chúc mừng, **không hiện điểm** — điểm và các câu cần chấm tay xem
+trong Google Sheet; phần "chọn nghề nhập vai" ở Mở đầu đã thay bằng **Tự đánh giá nhanh**
+(không chấm điểm, độc lập hoàn toàn với 5 vai đóng vai ở Hoạt động 4).
+
+Nút **🖨️ In / lưu PDF** ở slide cuối in cả 8 slide thành phiếu học tập giấy
 (mỗi hoạt động 1 trang).

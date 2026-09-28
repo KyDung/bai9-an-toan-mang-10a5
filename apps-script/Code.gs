@@ -34,8 +34,8 @@ var FIELDS = [
   ['danhHieu',            'Danh hiệu đội'],
   ['soThanhVien',         'Số thành viên'],
   ['thanhVien',           'Thành viên nhóm'],
-  ['ngheNhapVai',         'Nghề nhập vai'],
-  ['diem_TONG',           'ĐIỂM TỔNG (/10)'],
+  ['tuDanhGia',           'Tự đánh giá trước bài (không chấm điểm)'],
+  ['diem_TONG',           'ĐIỂM TỔNG (/10) — tự tính, GV cần chấm thêm phần tự luận'],
   ['diem_HD1_HD5',        'Điểm HĐ1+HĐ5 (/3)'],
   ['diem_HD2',            'Điểm HĐ2 (/3)'],
   ['diem_HD3',            'Điểm HĐ3 (/2)'],
@@ -140,7 +140,7 @@ function json_(obj) {
 function test_ThemDongGia() {
   doPost({ postData: { contents: JSON.stringify({
     hoTen: 'Nguyễn Văn Test', lop: '10A5', nhom: 'Nhóm 1',
-    ngheNhapVai: 'Chuyên viên An toàn thông tin',
+    tuDanhGia: 'Câu 1: Không đúng | Câu 2: Đúng với em',
     diem_TONG: 9.5, diem_HD1_HD5: 3, diem_HD2: 2.5, diem_HD3: 2, diem_HD4: 2,
     hd1_soDung: '6/6', hd5_diem: '5/5', bai: 'Bai 9 - Test'
   }) } });

@@ -10,9 +10,9 @@ Các slide này dùng để chiếu trên bảng **trước khi học sinh làm 
 
 > Hôm qua, em đã chia sẻ hoặc tải về điều gì trên mạng? Em có biết ai tạo ra nó không?
 
-**Nhiệm vụ:** Mỗi nhóm chọn một nghề nghiệp số và ghi thông tin nhóm. Hãy thử nhìn mọi thông tin bằng “con mắt” của nghề mình đã chọn.
+**Nhiệm vụ:** Ghi thông tin nhóm, rồi mỗi bạn tự trả lời nhanh 5 câu tự đánh giá thói quen an toàn số của mình (không chấm điểm — chỉ để tự soi trước khi học).
 
-**Dẫn sang web:** Mở **Mở đầu** → đọc 5 câu hỏi điều tra → chọn nghề. *(4 phút)*
+**Dẫn sang web:** Mở **Mở đầu** → điền thông tin nhóm → tự đánh giá nhanh → đọc 5 câu hỏi điều tra. *(4 phút)*
 
 ---
 
@@ -34,7 +34,7 @@ Các slide này dùng để chiếu trên bảng **trước khi học sinh làm 
 
 > Bạn An nhận được lời mời “việc nhẹ lương cao”. Nếu là An, em sẽ tin vào điều gì trước khi quyết định?
 
-**Nhiệm vụ:** Đọc tin nhắn, tìm **5 dấu hiệu đáng ngờ**, chọn cách xử lí và viết **3 việc làm đầu tiên theo vai nghề của nhóm**.
+**Nhiệm vụ:** Đọc tin nhắn, tìm **5 dấu hiệu đáng ngờ** trong 8 phương án, chọn cách xử lí đúng và viết **3 việc làm đầu tiên** theo đúng thứ tự.
 
 **Dẫn sang web:** Mở **HĐ2 · Hồ sơ vụ án**. *(10 phút)*
 
@@ -84,4 +84,7 @@ Các slide này dùng để chiếu trên bảng **trước khi học sinh làm 
 
 **Nhiệm vụ:** Chọn việc em cam kết làm trong 3 ngày tới; chọn một người thân và một kiểu lừa đảo sẽ nhắc; viết **tin nhắn cảnh báo 1–2 câu ngay tại lớp**.
 
-**Dẫn sang web:** Mở **HĐ6 · Vận dụng**, hoàn thành và **nộp bài**. Sau đó mở **Tổng kết** để xem lại kết quả. *(3 phút)*
+**Dẫn sang web:** Mở **HĐ6 · Vận dụng**, hoàn thành và **nộp bài**. *(3 phút)*
+
+> Lưu ý cho giáo viên: sau khi nộp, trang web chỉ hiện lời chúc mừng, **không hiện điểm** —
+> điểm và các câu cần chấm tay được giáo viên xem trong Google Sheet.

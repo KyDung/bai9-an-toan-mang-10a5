@@ -9,12 +9,12 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   /* ---------------- TRẠNG THÁI ---------------- */
-  const STORE_KEY = "attt10a5.answers.v3";
+  const STORE_KEY = "attt10a5.answers.v4";
   const S = {
     mode: "nhom",                     // "nhom" | "canhan"
     info: { hoten: "", lop: CONFIG.LOP || "10A5", nhom: "", danhhieu: "", nhonhat: "" },
     thanhvien: ["", "", ""],          // danh sách thành viên, thêm/bớt được
-    nghe: "",
+    tuDanhGia: {},                     // tự đánh giá nhanh (không chấm điểm)
     hd1: {}, hd1worst: "", hd1why: "",
     hd2: { flags: [], dec: "", w: ["", "", ""] },
     hd3: {}, hd3trap: "",
@@ -117,61 +117,15 @@
       : "Điền thông tin nhóm và <b>đặt danh hiệu cho đội</b> ngay bây giờ — danh hiệu này theo nhóm em suốt tiết học.";
     $("#lblHoTen").textContent = canhan ? "Họ và tên của em" : "Nhóm trưởng / người ghi phiếu";
     $("#lblDanhHieu").textContent = canhan ? "Danh hiệu của em" : "Danh hiệu của đội";
-    $("#resLbl").textContent = canhan ? "Điểm của em (thang 10)" : "Điểm của nhóm em (thang 10)";
-
     VOICE.apply();
     updateScore();
-  }
-
-  /* =========================================================
-     ỐNG KÍNH NGHỀ — nghề đã chọn hiện xuyên suốt các hoạt động
-     ========================================================= */
-  function renderLens() {
-    const n = DATA.ngheNghiep.find(x => x.id === S.nghe);
-
-    // chip trên thanh tiêu đề
-    const chip = $("#roleChip");
-    chip.innerHTML = n ? `${n.icon} <span>${esc(n.ten)}</span>` : `🎭 <span>Chưa chọn nghề</span>`;
-    chip.classList.toggle("empty", !n);
-
-    // dải "ống kính" đầu mỗi hoạt động
-    $$(".lens-slot").forEach(slot => {
-      slot.innerHTML = n
-        ? `<div class="lens"><span class="lens-ic">${n.icon}</span>
-             <span><b>Em đang nhìn bằng con mắt của ${esc(n.ten)}</b>
-             <span class="lens-q">Câu hỏi của nghề này: ${esc(n.ongKinh)}</span></span></div>`
-        : `<div class="lens lens-empty"><span class="lens-ic">🎭</span>
-             <span><b>Em chưa chọn nghề để nhập vai</b>
-             <span class="lens-q">Quay lại Hoạt động 1 (bước 3) chọn một nghề — mọi hoạt động sẽ có thêm câu hỏi định hướng riêng cho nghề đó.</span></span></div>`;
-    });
-
-    // HĐ3: nhóm Pháp chế / Sáng tạo nội dung làm cố vấn cho cả lớp (theo KHBD)
-    const ad = $("#hd3Advisor");
-    if (n && n.coVan) {
-      ad.hidden = false;
-      ad.innerHTML = `<b>⭐ Em là CỐ VẤN của lớp ở hoạt động này.</b>
-        Ngoài việc tự phân loại, khi nhóm khác hỏi “cái này có được dùng không?”,
-        em trả lời giúp với vai ${esc(n.ten)} và nêu rõ lí do.`;
-    } else {
-      ad.hidden = true;
-    }
-    VOICE.apply();
+    updateHd4VaiNote();
   }
 
   /* ---------------- KHỞI TẠO GIAO DIỆN ---------------- */
   function buildIntro() {
     $("#q5list").innerHTML = DATA.cauHoiDieuTra.map(q => `<li>${esc(q)}</li>`).join("");
-
-    $("#roleGrid").innerHTML = DATA.ngheNghiep.map(n => `
-      <button class="role" type="button" data-nghe="${n.id}" aria-pressed="false">
-        <img class="role-image" ${window.IMG_FALLBACK.attrs('assets/roles/' + n.id)} alt="" width="56" height="56" loading="lazy">
-        <span><b>${esc(n.ten)}</b><span>${esc(n.quanTam)}</span></span>
-      </button>`).join("");
-
-    $$("#roleGrid .role").forEach(b => b.addEventListener("click", () => {
-      S.nghe = S.nghe === b.dataset.nghe ? "" : b.dataset.nghe;
-      syncRoles(); save();
-    }));
+    buildTuDanhGia();
 
     const map = { fHoTen: "hoten", fLop: "lop", fNhom: "nhom", fDanhHieu: "danhhieu", fNhoNhat: "nhonhat" };
     Object.entries(map).forEach(([id, key]) => {
@@ -191,11 +145,36 @@
     $$("#modePick .mode-btn").forEach(b => b.addEventListener("click", () => {
       S.mode = b.dataset.mode; save(); applyMode();
     }));
+  }
 
-    // chip nghề trên thanh tiêu đề → quay về bước chọn nghề
-    $("#roleChip").addEventListener("click", () => {
-      go(0);
-      setTimeout(() => $("#roleGrid").scrollIntoView({ behavior: "smooth", block: "center" }), 350);
+  /** Bước 3 (Mở đầu) — Tự đánh giá nhanh: 5 câu tự nhận định, KHÔNG chấm điểm.
+   *  Chỉ dùng để học sinh tự soi và giáo viên tham khảo trước khi vào bài. */
+  function buildTuDanhGia() {
+    const T = DATA.tuDanhGia;
+    $("#tdgTieuDe").textContent = T.tieuDe;
+    $("#tdgMoTa").textContent = T.moTa;
+
+    $("#tdgList").innerHTML = T.cauHoi.map((c, i) => `
+      <div class="sc-item" data-id="${c.id}">
+        <p class="sc-txt"><span class="tag">Câu ${i + 1}</span>${esc(c.text)}</p>
+        <div class="sc-opt3">
+          ${T.mucDo.map((m, mi) => `<button type="button" data-v="${mi}" aria-pressed="false">${esc(m)}</button>`).join("")}
+        </div>
+      </div>`).join("");
+
+    $$("#tdgList .sc-opt3 button").forEach(b => b.addEventListener("click", () => {
+      const item = b.closest(".sc-item"), id = item.dataset.id, v = Number(b.dataset.v);
+      S.tuDanhGia[id] = S.tuDanhGia[id] === v ? undefined : v;
+      if (S.tuDanhGia[id] === undefined) delete S.tuDanhGia[id];
+      syncTuDanhGia(); save();
+    }));
+    syncTuDanhGia();
+  }
+
+  function syncTuDanhGia() {
+    $$("#tdgList .sc-item").forEach(item => {
+      const cur = S.tuDanhGia[item.dataset.id];
+      $$(".sc-opt3 button", item).forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.v) === cur)));
     });
   }
 
@@ -226,55 +205,25 @@
   function countMembers() {
     const n = S.thanhvien.filter(x => x.trim()).length;
     $("#memberCount").textContent = n ? n + " bạn" : "chưa có tên";
+    updateHd4VaiNote();   // số thành viên đổi → số vai cần nêu ý kiến ở HĐ4 cũng đổi theo
   }
 
   /** Danh sách thành viên dạng một dòng, dùng khi nộp bài. */
   function membersText() { return S.thanhvien.filter(x => x.trim()).join(", "); }
 
-  function syncRoles() {
-    $$("#roleGrid .role").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.nghe === S.nghe)));
-    const n = DATA.ngheNghiep.find(x => x.id === S.nghe);
-    const lbl = $("#hd2Role");
-    if (lbl) lbl.textContent = n ? n.icon + " " + n.ten : "(chưa chọn nghề ở Hoạt động 1)";
-    renderLens();
-    markHd4Role();
-  }
-
-  /** HĐ4: nói rõ nhóm cần mấy vai (theo số thành viên) và vai nào trùng nghề đã chọn.
-   *  Ở hoạt động này nhóm vẫn phải đi qua ĐỦ các góc nhìn — nghề chọn ở Hoạt động 1
-   *  chỉ quyết định vai nào nhóm phải phân tích sâu nhất, không thay thế các vai khác. */
-  function markHd4Role() {
-    const n = DATA.ngheNghiep.find(x => x.id === S.nghe);
+  /** HĐ4: nói rõ nhóm cần nêu ý kiến ít nhất mấy vai, tính theo số thành viên thật
+   *  của nhóm (độc lập hoàn toàn với phần Tự đánh giá ở Mở đầu). */
+  function updateHd4VaiNote() {
     const can = vaiCanThiet();
     const soBan = S.mode === "canhan" ? 1 : S.thanhvien.filter(x => x.trim()).length;
-
     const note = $("#hd4VaiNote");
-    if (note) {
-      const veSo = S.mode === "canhan"
-        ? `Em làm một mình → cần nêu ý kiến của ít nhất <b>${can} vai</b> (chọn vai nào cũng được).`
-        : soBan
-          ? `Nhóm em có <b>${soBan} bạn</b> → cần nêu ý kiến của ít nhất <b>${can} vai</b>.`
-            + (soBan < 5 ? " Nhóm ít bạn thì một bạn giữ 2 vai." : " Mỗi bạn một vai.")
-          : `Chưa điền danh sách thành viên ở Hoạt động 1 → tạm yêu cầu đủ <b>5 vai</b>.`;
-      const veNghe = n
-        ? ` Nghề nhóm em nhập vai là <b>${esc(n.ten)}</b> → vai được đánh dấu bên dưới là vai nhóm em phải phân tích <b>sâu nhất</b>, nhưng các vai còn lại vẫn phải có ý kiến.`
-        : "";
-      note.innerHTML = veSo + veNghe;
-    }
-
-    $$("#hd4Roles .slot").forEach(s => {
-      const khop = !!n && s.dataset.vai === n.vaiHd4;
-      s.classList.toggle("suggested", khop);
-      let tag = $(".slot-tag", s);
-      if (khop && !tag) {
-        tag = document.createElement("span");
-        tag.className = "slot-tag";
-        tag.textContent = "⬅ trùng nghề nhóm em nhập vai — phân tích sâu nhất";
-        $(".slot-h", s).appendChild(tag);
-      } else if (!khop && tag) {
-        tag.remove();
-      }
-    });
+    if (!note) return;
+    note.innerHTML = S.mode === "canhan"
+      ? `Em làm một mình → cần nêu ý kiến của ít nhất <b>${can} vai</b> (chọn vai nào cũng được).`
+      : soBan
+        ? `Nhóm em có <b>${soBan} bạn</b> → cần nêu ý kiến của ít nhất <b>${can} vai</b>.`
+          + (soBan < 5 ? " Nhóm ít bạn thì một bạn giữ 2 vai." : " Mỗi bạn một vai.")
+        : `Chưa điền danh sách thành viên ở Hoạt động 1 → tạm yêu cầu đủ <b>5 vai</b>.`;
   }
 
   /** Khối "Việc cần làm" — dùng chung cho mọi hoạt động. */
@@ -651,100 +600,6 @@
     el.classList.toggle("ok", n >= 8);
   }
 
-  /* ---------------- KIỂM TRA & CHẤM ---------------- */
-  function checkHd1() {
-    let ok = 0;
-    $$("#hd1List .qitem").forEach(item => {
-      const it = DATA.hd1.items.find(x => String(x.id) === item.dataset.id);
-      const cur = S.hd1[it.id];
-      const right = cur === it.dap;
-      if (right) ok++;
-      item.classList.toggle("ok", right);
-      item.classList.toggle("no", cur !== undefined && !right);
-      let exp = $(".qi-exp", item);
-      if (!exp) { exp = document.createElement("p"); exp.className = "qi-exp"; item.appendChild(exp); }
-      const ten = DATA.hd1.nhan.find(n => n.v === it.dap);
-      exp.innerHTML = `Đáp án: <b>${ten.icon} ${esc(ten.ten)}</b> — ${esc(it.giai)}`;
-    });
-    S.checked.hd1 = ok;
-    fb("#fbHd1", ok, DATA.hd1.items.length,
-      ok === 6 ? "Xuất sắc! Nhóm em đọc tín hiệu rất chuẩn." : "Xem lại phần giải thích ở từng tình huống nhé.");
-    $("#conclHd1").hidden = false;
-    finish();
-  }
-
-  function checkHd2() {
-    const dh = DATA.hd2.dauHieu;
-    const chosen = new Set(S.hd2.flags);
-    let hit = 0, miss = 0;
-    $$("#hd2Flags .opt").forEach(l => {
-      const d = dh.find(x => x.id === l.dataset.id);
-      const sel = chosen.has(d.id);
-      l.classList.remove("sel");
-      l.classList.toggle("ok", d.do);
-      l.classList.toggle("no", sel && !d.do);
-      if (d.do && sel) hit++;
-      if (!d.do && sel) miss++;
-      let m = $(".mark", l);
-      if (!m) { m = document.createElement("span"); m.className = "mark"; l.appendChild(m); }
-      m.textContent = d.do ? "🚩 dấu hiệu đỏ" : sel ? "✖ không phải" : "";
-    });
-
-    const decOk = DATA.hd2.quyetDinh.find(q => q.id === S.hd2.dec)?.dung === true;
-    $$("#hd2Dec .opt").forEach(l => {
-      const q = DATA.hd2.quyetDinh.find(x => x.id === l.dataset.id);
-      l.classList.remove("sel");
-      l.classList.toggle("ok", q.dung);
-      l.classList.toggle("no", S.hd2.dec === q.id && !q.dung);
-    });
-
-    const wDone = S.hd2.w.filter(x => x.trim().length > 2).length;
-    S.checked.hd2 = { hit, miss, decOk, wDone };
-
-    const li = [];
-    li.push(`Dấu hiệu đỏ: tìm đúng <b>${hit}/5</b>${miss ? `, chọn sai <b>${miss}</b>` : ""}.`);
-    li.push(decOk ? "Quyết định: <b>chính xác</b> — dừng lại, xác minh, báo người có trách nhiệm."
-                  : "Quyết định: <b>chưa đúng</b> — tuyệt đối không chuyển tiền, không gửi OTP/CCCD.");
-    li.push(`Ba việc làm đầu tiên: đã ghi <b>${wDone}/3</b>. Gợi ý: ${DATA.hd2.goiY3Viec.map(esc).join(" · ")}`);
-    fbHtml("#fbHd2", hit === 5 && miss === 0 && decOk ? "good" : hit >= 3 ? "mid" : "bad",
-      "Kết quả điều tra hồ sơ", li);
-    $("#conclHd2").hidden = false;
-    finish();
-  }
-
-  function checkHd3() {
-    let ok = 0;
-    $$("#hd3List .qitem").forEach(item => {
-      const it = DATA.hd3.items.find(x => x.id === item.dataset.id);
-      const cur = S.hd3[it.id];
-      const right = cur === it.dap || (it.dapPhu && cur === it.dapPhu);
-      if (right) ok++;
-      item.classList.toggle("ok", right);
-      item.classList.toggle("no", cur !== undefined && !right);
-      let exp = $(".qi-exp", item);
-      if (!exp) { exp = document.createElement("p"); exp.className = "qi-exp"; item.appendChild(exp); }
-      const ten = DATA.hd3.nhan.find(n => n.v === it.dap);
-      exp.innerHTML = `Đáp án: <b>${ten.icon} ${esc(ten.ten)}</b>${it.dapPhu ? " (chấp nhận cả mức ③)" : ""} — ${esc(it.giai)}`;
-    });
-
-    const trapOk = DATA.hd3.bay.luaChon.find(c => c.id === S.hd3trap)?.dung === true;
-    $$("#hd3Trap .opt").forEach(l => {
-      const c = DATA.hd3.bay.luaChon.find(x => x.id === l.dataset.id);
-      l.classList.remove("sel");
-      l.classList.toggle("ok", c.dung);
-      l.classList.toggle("no", S.hd3trap === c.id && !c.dung);
-    });
-
-    S.checked.hd3 = { ok, trapOk };
-    fbHtml("#fbHd3", ok >= 4 && trapOk ? "good" : ok >= 3 ? "mid" : "bad", "Kết quả phân loại quyền sử dụng", [
-      `Phân loại đúng <b>${ok}/5</b> sản phẩm số.`,
-      trapOk ? "Câu hỏi bẫy: <b>đúng</b> — “có trên Internet” ≠ “được dùng tự do”."
-             : "Câu hỏi bẫy: <b>chưa đúng</b> — mọi tác phẩm đều được bảo hộ quyền tác giả, trừ khi tác giả cho phép hoặc thuộc phạm vi công cộng."
-    ]);
-    $("#conclHd3").hidden = false;
-    finish();
-  }
-
   /** Số vai cần nêu ý kiến để được đủ điểm phần nhập vai HĐ4.
    *  Chia theo SỐ THÀNH VIÊN thật của nhóm: nhóm 3 bạn chỉ cần 3 vai. */
   function vaiCanThiet() {
@@ -752,49 +607,6 @@
     const n = S.thanhvien.filter(x => x.trim()).length;
     if (!n) return 5;                                  // chưa điền thành viên → yêu cầu đủ 5
     return Math.max(2, Math.min(5, n));
-  }
-
-  function checkHd4() {
-    const H = DATA.hd4;
-    const filled = H.vai.filter(v => (S.hd4.yKien[v.id] || "").trim().length > 2).length;
-    const xong = H.deXuat.filter(d => vanDeXong(d.id)).length;
-    const hasSlogan = S.hd4.slogan.trim().length > 4;
-    const can = vaiCanThiet();
-    S.checked.hd4 = { filled, xong, hasSlogan };
-
-    // đánh dấu từng dòng vấn đề: đã xử lí hay còn thiếu
-    $$("#hd4Table .vd-row").forEach(r => {
-      r.classList.toggle("missing", !vanDeXong(r.dataset.vd));
-    });
-
-    const tenVai = id => (H.vai.find(v => v.id === id) || {}).ten || id;
-    const dong = H.deXuat.map(d =>
-      `<b>Vấn đề ${d.id} — ${esc(d.ten)}</b>${vanDeXong(d.id) ? " ✔" : " <i>(nhóm em chưa ghi đủ)</i>"}<br>
-       <span class="fb-no">KHÔNG nên:</span> ${esc(d.khongNen)}<br>
-       <span class="fb-yes">NÊN:</span> ${esc(d.nen)}<br>
-       <span class="fb-who">Vai thường lo vấn đề này: ${d.vaiLo.map(v => esc(tenVai(v))).join(", ")}</span>`);
-
-    fbHtml("#fbHd4",
-      xong === 5 && filled >= can && hasSlogan ? "good" : xong >= 3 ? "mid" : "bad",
-      `Gợi ý đáp án — đã xử lí ${xong}/5 vấn đề, nêu ý kiến ${filled}/5 vai (cần ${can} vai)`,
-      [
-        ...dong,
-        `<b>Khẩu quyết mẫu:</b> “Trước khi sử dụng hoặc chia sẻ, hãy hỏi: Ai tạo ra? Ai sở hữu? Có được phép? Có an toàn? Có trách nhiệm?”`
-      ]);
-    finish();
-  }
-
-  function fb(sel, ok, total, msg) {
-    const cls = ok === total ? "good" : ok >= total / 2 ? "mid" : "bad";
-    fbHtml(sel, cls, `Đúng ${ok}/${total} tình huống`, [esc(msg)]);
-  }
-
-  function fbHtml(sel, cls, title, lines) {
-    const el = $(sel);
-    el.className = "feedback " + cls;
-    el.innerHTML = `<h4>${title}</h4><ul>${lines.map(l => `<li>${l}</li>`).join("")}</ul>`;
-    el.hidden = false;
-    VOICE.apply();
   }
 
   /* ---------------- ĐIỂM (thang 10 theo phụ lục KHBD) ---------------- */
@@ -835,39 +647,19 @@
     return parts;
   }
 
+  /* Điểm KHÔNG hiển thị trên trang — chỉ tính ngầm để gửi kèm bài nộp,
+     giáo viên xem trong Google Sheet (một phần còn cần chấm tay). */
   function updateScore() {
-    const s = computeScore();
-    $("#scoreChip").innerHTML = `${s.total}<small>/10</small>`;
-    $("#resScore").textContent = s.total;
-    $("#resRubric").innerHTML = [
-      ["Nhận diện tín hiệu nguy hiểm (HĐ1 + HĐ5)", s.p1, 3, `đúng ${s.detail.hd1ok}/6 tín hiệu · ${s.detail.hd5ok}/5 thử thách 5 giây`],
-      ["Phân tích hồ sơ vụ án số (HĐ2)", s.p2, 3, `${s.detail.hit}/5 dấu hiệu đỏ · quyết định ${s.detail.decOk ? "đúng" : "chưa đúng"} · ${s.detail.wDone}/3 việc làm`],
-      ["Phân loại quyền sử dụng sản phẩm số (HĐ3)", s.p3, 2, `đúng ${s.detail.hd3ok}/5 · câu bẫy ${s.detail.trapOk ? "đúng" : "chưa đúng"}`],
-      ["Hợp tác, nhập vai và trình bày (HĐ4)", s.p4, 2,
-        `${s.detail.vdXong}/5 vấn đề đã xử lí · ${s.detail.filled}/5 vai nêu ý kiến (cần ${s.detail.canVai} vai)`]
-    ].map(([t, p, m, d]) => `<li><span style="flex:1"><b>${t}</b><br><small style="color:var(--txt-dim)">${d}</small></span><span>${p}/${m}</span></li>`).join("");
-    $("#q5recall").innerHTML = DATA.cauHoiDieuTra.map(q => `<b>${esc(q)}</b>`).join("");
-    return s;
+    return computeScore();
   }
-  function finish() { updateScore(); save(); }
 
   /* ---------------- ĐIỀU HƯỚNG SLIDE ---------------- */
   const steps = $$(".step");
   let cur = 0;
 
-  function buildDots() {
-    $("#dots").innerHTML = steps.map((s, i) =>
-      `<button type="button" data-i="${i}" title="${esc(s.dataset.title)} · ${esc(s.dataset.time || "")}">${i}</button>`).join("");
-    $$("#dots button").forEach(b => b.addEventListener("click", () => go(Number(b.dataset.i))));
-  }
-
   function go(i) {
     cur = Math.max(0, Math.min(steps.length - 1, i));
     steps.forEach((s, k) => s.classList.toggle("active", k === cur));
-    $$("#dots button").forEach((b, k) => {
-      b.setAttribute("aria-current", String(k === cur));
-      b.classList.toggle("done", k < cur);
-    });
     $("#progressBar").style.width = ((cur) / (steps.length - 1) * 100) + "%";
     $("#navInfo").textContent = `${steps[cur].dataset.title} · ${steps[cur].dataset.time || ""}`;
     $("#btnPrev").disabled = cur === 0;
@@ -881,7 +673,6 @@
   /* ---------------- NỘP BÀI ---------------- */
   function payload() {
     const s = updateScore();
-    const nghe = DATA.ngheNghiep.find(n => n.id === S.nghe);
     const lbl3 = v => (DATA.hd3.nhan.find(n => n.v === v) || {}).ten || "";
     const lbl1 = v => (DATA.hd1.nhan.find(n => n.v === v) || {}).ten || "";
     const lbl5 = v => (DATA.hd5.the.find(t => t.v === v) || {}).ten || v || "";
@@ -896,7 +687,8 @@
       danhHieu: S.info.danhhieu,
       soThanhVien: S.mode === "canhan" ? 1 : S.thanhvien.filter(x => x.trim()).length,
       thanhVien: S.mode === "canhan" ? S.info.hoten : membersText(),
-      ngheNhapVai: nghe ? nghe.ten : "",
+      tuDanhGia: DATA.tuDanhGia.cauHoi.map((c, i) =>
+        `Câu ${i + 1}: ${DATA.tuDanhGia.mucDo[S.tuDanhGia[c.id]] || "—"}`).join(" | "),
       hd1_phanLoai: DATA.hd1.items.map((it, i) => `Câu ${i + 1}: ${lbl1(S.hd1[it.id]) || "—"}`).join(" | "),
       hd1_soDung: s.detail.hd1ok + "/6",
       hd1_nguyHiemNhat: S.hd1worst ? "Câu " + S.hd1worst : "",
@@ -978,7 +770,7 @@
       if (res.ok && json && json.ok === true) {
         S.submitted = true; clearSavedState();
         btn.textContent = "✅ ĐÃ NỘP BÀI";
-        note.innerHTML = "🎉 Nộp bài thành công! Nhóm em xem điểm ở slide <b>Tổng kết</b>.";
+        note.innerHTML = "🎉 Nộp bài thành công!";
         go(7);
       } else {
         // Server đã trả lời rõ ràng là lỗi (vd: getSheet_ ném exception) — báo đúng lỗi đó,
@@ -999,7 +791,7 @@
       await fetch(CONFIG.GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
       S.submitted = true; clearSavedState();
       btn.textContent = "✅ ĐÃ NỘP BÀI";
-      note.innerHTML = "🎉 Đã gửi bài (chế độ dự phòng, không kiểm tra được phản hồi). Nhóm em xem điểm ở slide <b>Tổng kết</b>. Nếu sau đó vẫn không thấy trong Sheet, báo giáo viên kiểm tra lại đường link Apps Script.";
+      note.innerHTML = "🎉 Đã gửi bài (chế độ dự phòng, không kiểm tra được phản hồi). Nếu sau đó giáo viên báo không thấy trong Sheet, hãy nộp lại hoặc báo giáo viên kiểm tra đường link Apps Script.";
       go(7);
     } catch (e2) {
       btn.disabled = false; btn.textContent = "📤 NỘP BÀI CHO GIÁO VIÊN";
@@ -1012,11 +804,8 @@
   function init() {
     load();
     buildIntro(); buildHd1(); buildHd2(); buildHd3(); buildHd4(); buildHd5(); buildHd6();
-    syncRoles(); buildDots();
+    $("#q5recall").innerHTML = DATA.cauHoiDieuTra.map(q => `<b>${esc(q)}</b>`).join("");
 
-    $$("[data-check]").forEach(b => b.addEventListener("click", () => {
-      ({ hd1: checkHd1, hd2: checkHd2, hd3: checkHd3, hd4: checkHd4 })[b.dataset.check]();
-    }));
     $("#btnPrev").addEventListener("click", () => go(cur - 1));
     $("#btnNext").addEventListener("click", () => go(cur + 1));
     $("#btnSubmit").addEventListener("click", submit);
