@@ -29,8 +29,7 @@ const DATA = {
      động cụ thể — 2 mốc "trước" và "sau" này tạo thành một mạch xuyên suốt. */
   tuDanhGia: {
     tieuDe: "Tự đánh giá nhanh trước khi học",
-    moTa:
-      "Trả lời thật với chính mình, không có câu nào đúng hay sai. Phần này không chấm điểm, chỉ giúp em (và cả thầy/cô) biết em đang ở đâu trước khi học bài này.",
+    moTa: "Trả lời thật với chính mình, không có câu nào đúng hay sai. Phần này không chấm điểm, chỉ giúp em (và cả thầy/cô) biết em đang ở đâu trước khi học bài này.",
     mucDo: ["Đúng với em", "Không đúng", "Không chắc"],
     cauHoi: [
       {
@@ -47,11 +46,11 @@ const DATA = {
       },
       {
         id: "d4",
-        text: "Em từng đăng lại (share) một bài viết hoặc hình ảnh mà không biết rõ ai là người tạo ra nó đầu tiên.",
+        text: "Em từng đăng lại một bài viết hoặc hình ảnh mà không biết rõ ai là người tạo ra nó đầu tiên.",
       },
       {
         id: "d5",
-        text: "Trước khi bấm vào một đường link lạ được gửi tới, em có thói quen kiểm tra xem nó có đáng tin không.",
+        text: "Em từng bấm vào một đường link lạ được gửi tới mà không kiểm tra kĩ trước.",
       },
     ],
   },
