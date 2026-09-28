@@ -382,6 +382,15 @@ body.mode-canhan .only-group{display:none !important}
    =========================================================== */
 /* z-index:auto → ảnh đặt front:true mới nổi được lên trên nội dung */
 .decor-layer{position:absolute;inset:0;pointer-events:none;z-index:auto}
+
+/* Vị trí ảnh (xPct/yPct trong decor-static.js) được canh cho MÀN HÌNH RỘNG
+   (laptop, TV, máy chiếu) — nơi nội dung có lề trống hai bên. Trên điện thoại
+   và máy tính bảng, nội dung chiếm gần hết chiều rộng màn hình nên cùng toạ
+   độ đó sẽ đè lên chữ/nút, gây vỡ layout → ẩn hẳn lớp trang trí ở màn hình hẹp.
+   Không ảnh hưởng tới bài làm hay điều hướng, chỉ ẩn ảnh trang trí thuần tuý. */
+@media (max-width:1024px){
+  .decor-layer{display:none !important}
+}
 .decor-item{position:absolute;pointer-events:none;user-select:none;will-change:transform}
 .decor-item img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
 body.decor-on .decor-layer{z-index:40}
