@@ -804,7 +804,6 @@
   function init() {
     load();
     buildIntro(); buildHd1(); buildHd2(); buildHd3(); buildHd4(); buildHd5(); buildHd6();
-    $("#q5recall").innerHTML = DATA.cauHoiDieuTra.map(q => `<b>${esc(q)}</b>`).join("");
 
     $("#btnPrev").addEventListener("click", () => go(cur - 1));
     $("#btnNext").addEventListener("click", () => go(cur + 1));

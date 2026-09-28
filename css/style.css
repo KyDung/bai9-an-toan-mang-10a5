@@ -352,12 +352,8 @@ body.mode-canhan .only-group{display:none !important}
 /* ---------- HOÀN THÀNH (không hiện điểm — điểm chỉ có trong Sheet) ---------- */
 .result-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 20px 26px;
   text-align:center;box-shadow:var(--shadow)}
-.congrats-txt{margin:0 0 10px;font-size:19px;font-weight:700;line-height:1.5}
-.congrats-sub{margin:0 auto 20px;max-width:52ch;font-size:14px;line-height:1.65;color:var(--txt-dim)}
+.congrats-txt{margin:0 0 18px;font-size:19px;font-weight:700;line-height:1.5}
 .congrats-slogan{margin:0 0 22px;font-size:17px;font-weight:700}
-.q5-recall{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px}
-.q5-recall b{font-size:12.5px;padding:8px 13px;border-radius:99px;background:rgba(53,224,242,.1);
-  border:1px solid rgba(53,224,242,.32);font-weight:600}
 
 .result-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .btn-reset{background:linear-gradient(135deg,rgba(255,197,61,.16),rgba(255,90,106,.12));

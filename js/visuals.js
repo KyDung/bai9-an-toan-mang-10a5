@@ -8,7 +8,7 @@ const LESSON_VISUALS = (() => {
     scene('copy-article', 'Một bài viết trên website được sao chép sang sản phẩm của nhóm.', 'Bài gốc và sản phẩm nhóm'),
     scene('recruiter-otp', 'Người tuyển dụng yêu cầu gửi mã OTP để xác nhận hồ sơ.', 'Yêu cầu xác nhận hồ sơ'),
     scene('photo-permission', 'Bạn cùng lớp đồng ý cho dùng ảnh trong poster của nhóm.', 'Trao đổi về ảnh poster'),
-    scene('unread-license', 'Kho mã có tệp LICENSE; nhóm đã lấy mã nhưng chưa đọc tệp này.', 'Kho mã nguồn và giấy phép')
+    scene('app-permission', 'Ứng dụng chỉnh sửa ảnh xin quyền truy cập danh bạ, tin nhắn SMS và ảnh trên máy.', 'Màn hình xin cấp quyền')
   ];
   const hd3 = [
     scene('unknown-photo', 'Ảnh phong cảnh trên Internet không có thông tin tác giả, nguồn và giấy phép.', 'Ảnh trên Internet'),

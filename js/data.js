@@ -110,9 +110,9 @@ const DATA = {
       },
       {
         id: 6,
-        text: "Nhóm em tải một đoạn mã nguồn có sẵn trên GitHub về dùng cho dự án, nhưng chưa đọc tệp giấy phép (LICENSE) đi kèm.",
+        text: "Khi cài một ứng dụng chỉnh sửa ảnh miễn phí, ứng dụng xin quyền truy cập danh bạ và tin nhắn của em, dù chức năng chính chỉ là chỉnh sửa ảnh.",
         dap: 2,
-        giai: "Mỗi đoạn mã nguồn có điều kiện sử dụng riêng ghi trong tệp giấy phép (license) — phải đọc kĩ trước khi quyết định cách dùng.",
+        giai: "Ứng dụng xin quyền vượt quá nhu cầu sử dụng thực tế (chỉnh sửa ảnh không cần đọc danh bạ hay tin nhắn) → cần cảnh giác, kiểm tra kĩ trước khi đồng ý cấp quyền.",
       },
     ],
   },
@@ -152,31 +152,13 @@ const DATA = {
       "👉 Đăng kí tại: vieclam-2026.top",
       "(Sau khi đăng kí) Bạn chuyển 300.000đ phí kích hoạt tài khoản và gửi họ tên, số CCCD, số tài khoản ngân hàng, mã OTP để hoàn tất hồ sơ nhé!",
     ],
-    /* Bước 2 – chọn đúng 5 dấu hiệu đỏ trong 8 phương án */
+    /* Bước 2 – chọn đúng 5 dấu hiệu đỏ trong 8 phương án.
+       Thứ tự đúng/sai đã xen kẽ, KHÔNG xếp liền 5 đúng rồi mới tới 3 sai,
+       để học sinh phải đọc từng câu thay vì đoán theo cụm vị trí. */
     dauHieu: [
-      {
-        id: "a",
-        text: "Hứa hẹn thu nhập rất cao (500.000 – 1.000.000đ/ngày) trong khi không đòi hỏi kinh nghiệm hay bằng cấp gì.",
-        do: true,
-      },
-      {
-        id: "b",
-        text: "Thúc giục đăng kí ngay lập tức vì “số lượng có hạn”, tạo cảm giác phải quyết định thật nhanh, không kịp suy nghĩ.",
-        do: true,
-      },
       {
         id: "c",
         text: "Đường link dẫn tới một tên miền lạ (vieclam-2026.top), không phải website chính thức của một công ty cụ thể nào.",
-        do: true,
-      },
-      {
-        id: "d",
-        text: "Yêu cầu chuyển tiền trước khi được nhận việc, với lí do “phí kích hoạt tài khoản”.",
-        do: true,
-      },
-      {
-        id: "e",
-        text: "Đòi hỏi những thông tin rất nhạy cảm cùng lúc: số CCCD, số tài khoản ngân hàng và mã OTP.",
         do: true,
       },
       {
@@ -185,36 +167,58 @@ const DATA = {
         do: false,
       },
       {
+        id: "a",
+        text: "Hứa hẹn thu nhập rất cao (500.000 – 1.000.000đ/ngày) trong khi không đòi hỏi kinh nghiệm hay bằng cấp gì.",
+        do: true,
+      },
+      {
         id: "g",
         text: "Tin nhắn được gửi đến vào buổi tối.",
         do: false,
+      },
+      {
+        id: "e",
+        text: "Đòi hỏi những thông tin rất nhạy cảm cùng lúc: số CCCD, số tài khoản ngân hàng và mã OTP.",
+        do: true,
       },
       {
         id: "h",
         text: "Tin nhắn có sử dụng một vài biểu tượng cảm xúc (emoji).",
         do: false,
       },
+      {
+        id: "b",
+        text: "Thúc giục đăng kí ngay lập tức vì “số lượng có hạn”, tạo cảm giác phải quyết định thật nhanh, không kịp suy nghĩ.",
+        do: true,
+      },
+      {
+        id: "d",
+        text: "Yêu cầu chuyển tiền trước khi được nhận việc, với lí do “phí kích hoạt tài khoản”.",
+        do: true,
+      },
     ],
-    /* Bước 3 – quyết định (vị trí đáp án đúng đã đảo, không nằm cố định một chỗ) */
+    /* Bước 3 – quyết định. Vị trí đáp án đúng đã đảo (không cố định một chỗ),
+       và cả 4 phương án được viết dài ngắn gần bằng nhau — không để đáp án
+       đúng nổi bật vì dài hơn hẳn 3 phương án còn lại. */
     quyetDinh: [
       {
         id: "q1",
-        text: "Chuyển trước 300.000đ để thử xem công ty này có thật hay không.",
+        text: "Chuyển trước 300.000đ để thử xem công ty này có thật hay không, vì đằng nào cũng đã trót đăng kí rồi.",
         dung: false,
       },
       {
         id: "q2",
-        text: "Không cung cấp thêm bất kì thông tin nào, dừng lại ngay; tự tìm và xác minh công ty qua kênh chính thức (website, số điện thoại đã công khai từ trước); báo cho bố mẹ hoặc thầy cô biết.",
+        text: "Không cung cấp thêm thông tin gì nữa, dừng lại ngay và xác minh công ty qua một kênh chính thức, rồi báo cho bố mẹ hoặc thầy cô.",
         dung: true,
       },
       {
         id: "q3",
-        text: "Gửi số CCCD trước, còn mã OTP thì giữ lại cho an toàn hơn.",
+        text: "Gửi trước số CCCD, còn mã OTP thì giữ lại cho riêng mình để an toàn hơn một chút.",
         dung: false,
       },
       {
         id: "q4",
-        text: "Vẫn đăng kí ngay kẻo hết “số lượng có hạn”, tính tiếp sau khi đã có việc làm.",
+        text: "Vẫn đăng kí ngay kẻo hết “số lượng có hạn”, chuyện tiền bạc tính sau cũng chưa muộn.",
         dung: false,
       },
     ],
