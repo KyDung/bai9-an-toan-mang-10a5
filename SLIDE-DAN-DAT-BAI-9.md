@@ -22,7 +22,7 @@ Các slide này dùng để chiếu trên bảng **trước khi học sinh làm 
 
 > Một thông tin trên mạng khiến em yên tâm, cần kiểm tra thêm hay phải dừng lại ngay?
 
-**Nhiệm vụ:** Quan sát 6 tình huống; chọn **An toàn / Cảnh giác / Dừng lại**. Sau đó chọn tình huống nguy hiểm nhất và giải thích bằng một câu.
+**Nhiệm vụ:** Quan sát 6 tình huống; chọn **An toàn / Kiểm tra lại / Dừng lại**. Sau đó chọn tình huống nguy hiểm nhất và giải thích bằng một câu.
 
 **Dẫn sang web:** Mở **HĐ1 · Tín hiệu**. *(6 phút)*
 
@@ -68,9 +68,9 @@ Các slide này dùng để chiếu trên bảng **trước khi học sinh làm 
 
 **Chiếu trên bảng**
 
-> Trên mạng, đôi khi em chỉ có vài giây để quyết định. Việc này **AN TOÀN, cần CẢNH GIÁC kiểm tra, hay phải DỪNG LẠI**?
+> Trên mạng, đôi khi em chỉ có vài giây để quyết định. Việc này **AN TOÀN, cần KIỂM TRA LẠI, hay phải DỪNG LẠI**?
 
-**Nhiệm vụ:** Cả nhóm sẵn sàng rồi mới bấm **Bắt đầu**. Mỗi tình huống có **10 giây** để trả lời câu hỏi *“Gặp tình huống này, em nên làm gì?”* bằng một trong ba tín hiệu 🟢 AN TOÀN · 🟡 CẢNH GIÁC · 🔴 DỪNG LẠI — vẫn là ba tín hiệu của HĐ1. Xem giải thích ngay sau khi trả lời.
+**Nhiệm vụ:** Cả nhóm sẵn sàng rồi mới bấm **Bắt đầu**. Mỗi tình huống có **10 giây** để trả lời câu hỏi *“Gặp tình huống này, em nên làm gì?”* bằng một trong ba tín hiệu 🟢 AN TOÀN · 🟡 KIỂM TRA LẠI · 🔴 DỪNG LẠI — vẫn là ba tín hiệu của HĐ1. Xem giải thích ngay sau khi trả lời.
 
 **Dẫn sang web:** Mở **HĐ5 · Thử thách 10s**. *(5 phút)*
 

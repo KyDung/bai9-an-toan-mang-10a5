@@ -56,14 +56,14 @@ const DATA = {
     ],
   },
 
-  /* HĐ1 – 6 tín hiệu: 1 An toàn · 2 Cảnh giác · 3 Dừng lại */
+  /* HĐ1 – 6 tín hiệu: 1 An toàn · 2 Kiểm tra lại · 3 Dừng lại */
   hd1: {
     nhiemVu: [
       {
         b: 1,
         ten: "Phân loại 6 tình huống",
         phut: "4 phút",
-        mo: "Đọc kĩ từng tình huống và hình minh họa. Với mỗi câu, chọn đúng 1 trong 3 mức: An toàn, Cảnh giác hoặc Dừng lại.",
+        mo: "Đọc kĩ từng tình huống và hình minh họa. Với mỗi câu, chọn đúng 1 trong 3 mức: An toàn, Kiểm tra lại hoặc Dừng lại.",
       },
       {
         b: 2,
@@ -74,7 +74,7 @@ const DATA = {
     ],
     nhan: [
       { v: 1, ten: "An toàn", mau: "green", icon: "🟢" },
-      { v: 2, ten: "Cảnh giác", mau: "yellow", icon: "🟡" },
+      { v: 2, ten: "Kiểm tra lại", mau: "yellow", icon: "🟡" },
       { v: 3, ten: "Dừng lại", mau: "red", icon: "🔴" },
     ],
     items: [
@@ -112,7 +112,7 @@ const DATA = {
         id: 6,
         text: "Khi cài một ứng dụng chỉnh sửa ảnh miễn phí, ứng dụng xin quyền truy cập danh bạ và tin nhắn của em, dù chức năng chính chỉ là chỉnh sửa ảnh.",
         dap: 2,
-        giai: "Ứng dụng xin quyền vượt quá nhu cầu sử dụng thực tế (chỉnh sửa ảnh không cần đọc danh bạ hay tin nhắn) → cần cảnh giác, kiểm tra kĩ trước khi đồng ý cấp quyền.",
+        giai: "Ứng dụng xin quyền vượt quá nhu cầu sử dụng thực tế (chỉnh sửa ảnh không cần đọc danh bạ hay tin nhắn) → cần kiểm tra kĩ trước khi đồng ý cấp quyền.",
       },
     ],
   },
@@ -457,7 +457,7 @@ const DATA = {
         b: 2,
         ten: "Chọn đáp án trong 10 giây",
         phut: "2 phút",
-        mo: "Với mỗi trong 5 tình huống, trả lời câu “em nên làm gì?” bằng đúng 1 trong 3 tín hiệu: AN TOÀN, CẢNH GIÁC hoặc DỪNG LẠI. Hết 10 giây mà chưa chọn thì mất điểm câu đó.",
+        mo: "Với mỗi trong 5 tình huống, trả lời câu “em nên làm gì?” bằng đúng 1 trong 3 tín hiệu: AN TOÀN, KIỂM TRA LẠI hoặc DỪNG LẠI. Hết 10 giây mà chưa chọn thì mất điểm câu đó.",
       },
       {
         b: 3,
@@ -477,7 +477,7 @@ const DATA = {
       },
       {
         v: "vang",
-        ten: "CẢNH GIÁC",
+        ten: "KIỂM TRA LẠI",
         moTa: "Phải kiểm tra, xác minh trước",
         mau: "yellow",
         icon: "🟡",
@@ -501,7 +501,7 @@ const DATA = {
         id: 2,
         text: "Em tìm được một bức ảnh rất đẹp trên Internet muốn đưa vào bài thuyết trình, nhưng chưa biết ai là tác giả hay ảnh có giấy phép sử dụng gì không.",
         dap: "vang",
-        giai: "Chưa rõ tác giả và giấy phép → CẢNH GIÁC, phải kiểm tra kĩ trước khi dùng.",
+        giai: "Chưa rõ tác giả và giấy phép → KIỂM TRA LẠI, phải xem kĩ trước khi dùng.",
       },
       {
         id: 3,
